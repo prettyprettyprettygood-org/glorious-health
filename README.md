@@ -1,154 +1,68 @@
-# Astro Mission-First Template
+# Glorious Health Ministries
 
-Reusable Astro starter for nonprofits and organizations doing public-good work.
+Marketing site for Glorious Health Ministries, a faith-based healing and support
+ministry for widows. The site introduces the ministry's three pillars —
+Gatherings, Connection, and Sisterhood — shares the founder's story, and gives
+widows, churches, and funeral homes a way to learn more and get in touch.
 
-This template is static-first, accessibility-first, and designed to be cloned for new projects with minimal setup.
+Domain: [glorioushealthministries.com](https://glorioushealthministries.com)
 
-## Purpose
+## Tech Stack
 
-- Ship maintainable static websites quickly.
-- Preserve high quality standards on every project.
-- Keep cloned projects focused on content, layout, tokens, and accessibility.
-- Provide agent-ready docs with clear rules for template maintenance vs cloned-site editing.
+- **[Astro](https://astro.build)** — static site generation, no client-side framework
+- **TypeScript**
+- **Vanilla CSS** — custom design tokens (`src/styles/global.css`), no CSS framework
+- **[Vitest](https://vitest.dev)** — unit tests
+- **ESLint** (`typescript-eslint`, `eslint-plugin-astro`, `eslint-plugin-jsx-a11y`) + **Prettier**
+- **[@lucide/astro](https://lucide.dev)** — icons
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** — sitemap generation
 
-## Standards
+## Getting Started
 
-All projects cloned from this template must follow:
+```bash
+npm install
+npm run dev
+```
 
-- WCAG 2.2 AA baseline.
-- Full keyboard navigation and visible focus styles.
-- Semantic HTML first, ARIA only when required.
-- Theme tokens and reusable components (no hard-coded component colors).
-- Validation before completion: typecheck, lint, tests, build.
+## Scripts
 
-Reference docs:
-
-- docs/STANDARDS.md
-- docs/WCAG_2.2_CHECKLIST.md
-- docs/AGENT_PROMPT_OPENERS.md
-- docs/AGENT_QUICKSTART.md
-- docs/PRD_LAYOUT_VARIANTS.md
-- docs/PRD_COMPONENT_LIBRARY_ROADMAP.md
-- docs/agents/template-maintainer/README.md
-- docs/agents/site-builder/README.md
-- docs/agents/template-maintainer/ACCESSIBILITY_AUDIT_NOTE.md
-- docs/agents/template-maintainer/BACKEND_ENABLEMENT.md
-- docs/PRD_MOTION_AND_INTERACTION_COMPONENTS.md
-- docs/PRD_VISUAL_BUILDER_FEASIBILITY.md
-
-## Create New Projects From This Template (GitHub)
-
-1. Open this repository on GitHub.
-2. Click Use this template.
-3. Select Create a new repository.
-4. Choose owner, repository name, and visibility.
-5. Leave Include all branches unchecked unless you intentionally want every branch copied.
-6. Click Create repository from template.
-
-Notes:
-
-- A repository created from a template starts with unrelated history.
-- Use this template repo as your source of truth, then do client work in newly generated repos.
-
-## Local Quick Start
-
-1. Clone this repository.
-2. Rename the local folder to your new project name.
-3. Update package metadata in package.json.
-4. Install dependencies.
-5. Start development server.
-6. Confirm git hooks are installed for commit-time checks.
-
-Commands:
-
-- npm install
-- npm run dev
-- npm run hooks:install
-
-## Validation Commands
-
-- npm run typecheck
-- npm run lint
-- npm run test
-- npm run build
-- npm run validate
-
-CI:
-
-- GitHub Actions workflow: .github/workflows/ci.yml
-
-## Commit Guardrails (Solo Main Workflow)
-
-This template installs a local pre-commit hook from `.githooks/pre-commit`.
-
-- Hook command: `npm run precommit:check`
-- Checks run on commit: typecheck, lint, tests
-- Manual install/reinstall: `npm run hooks:install`
-
-This gives fast local quality checks before each commit, even when working directly on `main`.
+| Command                | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `npm run dev`          | Start the local dev server               |
+| `npm run build`        | Build the static site to `dist/`         |
+| `npm run preview`      | Preview the production build locally     |
+| `npm run typecheck`    | Run `astro check`                        |
+| `npm run lint`         | Run ESLint                               |
+| `npm run test`         | Run the test suite once                  |
+| `npm run test:watch`   | Run tests in watch mode                  |
+| `npm run format`       | Format the codebase with Prettier        |
+| `npm run format:check` | Check formatting without writing changes |
+| `npm run validate`     | typecheck + lint + test + build          |
 
 ## Project Structure
 
 ```text
-.
-├── .github/
-│   ├── copilot-instructions.md
-│   ├── instructions/
-│   └── prompts/
-├── docs/
-│   ├── agents/
-│   │   ├── site-builder/
-│   │   └── template-maintainer/
-│   ├── AGENT_QUICKSTART.md
-│   ├── STANDARDS.md
-│   └── WCAG_2.2_CHECKLIST.md
-├── src/
-│   ├── components/
-│   │   ├── layout/
-│   │   ├── sections/
-│   │   └── ui/
-│   ├── config/
-│   ├── layouts/
-│   ├── pages/
-│   ├── styles/
-│   └── utils/
-├── .env.example
-└── package.json
+src/
+├── components/
+│   ├── layout/       # Navbar, Footer
+│   └── ui/           # Button, Card, Feature, TimelineItem, InfoBlock, StyledDropdown
+├── config/
+│   └── site.ts       # Site name, tagline, nav links, contact email — edit here for site-wide copy
+├── layouts/
+│   └── BaseLayout.astro  # <head> meta/SEO, page shell
+├── pages/
+│   └── index.astro   # The single-page site (hero, about, pillars, workshops, blog, contact)
+└── styles/
+    └── global.css     # Design tokens (color, spacing, type) and all site styles
+public/
+└── images/            # Site imagery (dove, ivy, logo, etc.)
 ```
 
-## Included Baseline UI
+## Editing Content
 
-- Reusable layout with skip link, navbar, and footer.
-- Reusable card and button components.
-- Theme token system with live theme selector.
-- Reusable styled dropdown with progressive enhancement (native select fallback).
-- Home page sections that can be replaced with client content.
+Most day-to-day copy changes happen in two places:
 
-## Optional Backend
+- **`src/config/site.ts`** — site name, tagline, nav/footer links, contact email
+- **`src/pages/index.astro`** — section headings and body copy for each part of the page
 
-Backend features are not included by default.
-
-If backend behavior is explicitly requested, use:
-
-- docs/agents/template-maintainer/BACKEND_ENABLEMENT.md
-
-## Agent Workflow
-
-For AI-assisted implementation:
-
-1. Fill PROJECT_BRIEF.md using docs/PROJECT_BRIEF_TEMPLATE.md.
-2. Select agent mode in docs/AGENT_QUICKSTART.md.
-3. In cloned projects, prioritize rearranging existing components, updating copy, metadata, and tokens.
-4. In this template source repo, implement reusable code changes when new features are requested.
-5. Run npm run validate and resolve failures.
-
-Prompt starters:
-
-- .github/prompts/template-maintainer/maintain-template.prompt.md
-- .github/prompts/site-builder/use-template-without-new-code.prompt.md
-- .github/prompts/new-site-kickoff.prompt.md (legacy compatibility prompt)
-
-## Notes
-
-- This repo is meant to be copied and adapted, not treated as a single product codebase.
-- Keep docs current as your process evolves.
+Before committing changes, run `npm run validate` to confirm typechecking, linting, tests, and the build all pass.
