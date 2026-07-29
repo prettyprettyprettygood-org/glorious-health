@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+  class?: string;
+}
+
+const { title, eyebrow, class: className = '' } = Astro.props;
+---
+
+<li class={`timeline-item ${className}`.trim()}>
+  <span class="timeline-marker" aria-hidden="true"></span>
+  <div class="timeline-body">
+    {eyebrow && <p class="timeline-eyebrow">{eyebrow}</p>}
+    <h3 class="timeline-title">{title}</h3>
+    <div class="timeline-copy">
+      <slot />
+    </div>
+  </div>
+</li>

@@ -10,6 +10,7 @@ const { title, eyebrow, href, class: className = '' } = Astro.props;
 ---
 
 <article class={`card ${className}`.trim()}>
+  <slot name="icon" />
   {eyebrow && <p class="card-eyebrow">{eyebrow}</p>}
   <h3 class="card-title">
     {href ? <a href={href}>{title}</a> : title}

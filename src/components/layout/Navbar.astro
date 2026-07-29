@@ -1,13 +1,17 @@
 ---
 import { SITE } from '../../config/site';
-import ThemePicker from './ThemePicker.astro';
 ---
 
 <header class="site-header">
   <div class="site-header-inner container">
-    <a href="/" class="brand" aria-label={`Go to ${SITE.name} homepage`}>
-      <span class="brand-kicker">Template</span>
-      <span class="brand-name">{SITE.shortName}</span>
+    <a href="/" class="brand" aria-label={`${SITE.name} home`}>
+      <span class="brand-kicker">{SITE.tagline}</span>
+      <span class="brand-wordmark">
+        <span class="brand-primary">Glorious</span>{' '}
+        <span class="brand-secondary" aria-label="Health">
+          <span aria-hidden="true">Heal<span class="brand-t">&#x271D;</span>h</span>
+        </span>
+      </span>
     </a>
 
     <nav aria-label="Primary" class="site-nav">
@@ -21,7 +25,5 @@ import ThemePicker from './ThemePicker.astro';
         }
       </ul>
     </nav>
-
-    <ThemePicker />
   </div>
 </header>

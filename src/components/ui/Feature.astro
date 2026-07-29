@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+  class?: string;
+}
+
+const { title, eyebrow, class: className = '' } = Astro.props;
+---
+
+<div class={`feature ${className}`.trim()}>
+  <slot name="icon" />
+  <div class="feature-body">
+    {eyebrow && <p class="feature-eyebrow">{eyebrow}</p>}
+    <h3 class="feature-title">{title}</h3>
+    <div class="feature-copy">
+      <slot />
+    </div>
+  </div>
+</div>

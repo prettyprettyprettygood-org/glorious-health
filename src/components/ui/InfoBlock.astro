@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+  class?: string;
+}
+
+const { title, eyebrow, class: className = '' } = Astro.props;
+---
+
+<div class={`info-block ${className}`.trim()}>
+  {eyebrow && <p class="info-block-eyebrow">{eyebrow}</p>}
+  <h3 class="info-block-title">{title}</h3>
+  <div class="info-block-body">
+    <slot />
+  </div>
+</div>

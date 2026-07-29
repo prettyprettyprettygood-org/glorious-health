@@ -1,22 +1,23 @@
 export const SITE = {
-  name: 'Community Web Template',
-  shortName: 'Template',
-  description: 'A reusable Astro starter for accessible, maintainable, mission-driven websites.',
+  name: 'Glorious Health Ministries',
+  shortName: 'Glorious Health',
+  tagline: 'Healing Journey for Widows',
+  description: 'A healing journey for widows built on gatherings, connection, and sisterhood.',
+  verse: '3 John 1:2',
   nav: [
-    { href: '#services', label: 'Services' },
-    { href: '#standards', label: 'Standards' },
-    { href: '#themes', label: 'Themes' },
-    { href: '#kickoff', label: 'Kickoff' },
+    { href: '#about', label: 'About' },
+    { href: '#pillars', label: 'Our Pillars' },
+    { href: '#workshops', label: 'Workshops' },
+    { href: '#blog', label: 'Blog' },
+    { href: '#contact', label: 'Contact' },
   ],
   footerLinks: [
-    { href: '/#services', label: 'Services' },
-    { href: '/#standards', label: 'Standards' },
-    { href: '/#themes', label: 'Themes' },
-    { href: '/#kickoff', label: 'Kickoff' },
+    { href: '/#about', label: 'About' },
+    { href: '/#pillars', label: 'Our Pillars' },
+    { href: '/#workshops', label: 'Workshops' },
+    { href: '/#blog', label: 'Blog' },
+    { href: '/#contact', label: 'Contact' },
   ],
-  contactEmail: 'hello@example.org',
+  contactEmail: 'glorioushealth1@gmail.com',
   yearStarted: 2026,
 } as const;
-
-export const THEMES = ['sprout', 'ocean', 'earth'] as const;
-export type ThemeName = (typeof THEMES)[number];
