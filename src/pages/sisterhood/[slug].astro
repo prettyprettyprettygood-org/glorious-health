@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import { ArrowLeft } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('sisterhood');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
+}).format(post.data.date);
+---
+
+<BaseLayout title={`${post.data.title} — ${SITE.name}`} description={post.data.excerpt}>
+  <article class="section stack post">
+    <a href="/sisterhood/" class="post-back">
+      <ArrowLeft aria-hidden="true" />
+      Back to Sisterhood
+    </a>
+    <div class="post-header">
+      <p class="kicker">{formattedDate}</p>
+      <h1>{post.data.title}</h1>
+      {post.data.draft && <p class="chip">Draft</p>}
+    </div>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

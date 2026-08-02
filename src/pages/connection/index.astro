@@ -1,7 +1,104 @@
 ---
+import { Check, MapPin, Phone, Mail } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import { SITE } from '../../config/site';
+
+const websites = [
+  {
+    title: 'Hope for Widows Foundation',
+    href: 'https://www.hopeforwidows.org',
+    domain: 'www.hopeforwidows.org',
+    description:
+      "A supportive community that cares. Hope for Widows is a non-profit organization developed by widowed women that strives to offset the financial challenges of and build community among widowed women worldwide. Their vision is to create a strong network of widows.",
+  },
+  {
+    title: 'Speaking Grief Documentary',
+    href: 'https://www.speakinggrief.org/documentary',
+    domain: 'www.speakinggrief.org/documentary',
+    description:
+      'Speaking Grief validates the experience of grievers and guides those wishing to support them. By sharing diverse representations of bereavement, it illustrates that grief is a universal, yet individual, experience — loaded with ways to understand and support grief and grievers.',
+  },
+  {
+    title: 'Soaring Spirits International',
+    href: 'https://www.soaringspirits.org',
+    domain: 'www.soaringspirits.org',
+    description:
+      'Soaring Spirits uses a four-pillar approach to support widowed people, their families, and their communities, meeting evolving needs across the widowed experience.',
+  },
+  {
+    title: 'Modern Widows Club',
+    href: 'https://www.modernwidowsclub.org',
+    domain: 'www.modernwidowsclub.org',
+    description:
+      "A women's health organization that provides compassionate support to widows, empowering them to thrive as they move from grief to growth.",
+  },
+  {
+    title: 'Full Circle Grief Center',
+    href: 'https://www.fullcirclegc.org',
+    domain: 'www.fullcirclegc.org',
+    description:
+      'A Richmond, VA–based nonprofit that empowers our community to grieve in a healthy way by providing professional bereavement support, including therapy and groups. Grief support groups are offered free of charge and often meet for 8-week sessions.',
+    contact: {
+      address: '5511 Staples Mill Rd, Suite 301',
+      mapsHref:
+        'https://www.google.com/maps/search/?api=1&query=' +
+        encodeURIComponent('5511 Staples Mill Rd, Suite 301, Richmond, VA'),
+      phone: '(804) 912-2947',
+      phoneHref: 'tel:+18049122947',
+      email: 'info@fullcirclegc.org',
+    },
+  },
+];
+
+const books = [
+  {
+    title: "A Widow's Journey: Reflections on Walking Alone",
+    author: 'Gayle Roper',
+    favorite: true,
+    note: 'This little gem of a book allows you to walk alongside the writer as she writes of her emotions following the loss of her beloved husband. Her compassionate words will resonate with your own loss and encourage you through those dark and lonely days. A keepsake!',
+    bestFor: 'Reflections on daily life as a widow',
+    whyItHelps: [
+      'Written by someone who lived the pains of widowhood from a Christian perspective',
+      'Restores faith in God to find your deepest comfort',
+    ],
+  },
+  {
+    title: "It's OK That You're Not OK",
+    author: 'Megan Devine',
+    bestFor: "Anyone newly grieving who's tired of toxic positivity",
+    whyItHelps: [
+      'Validates that grief is terrible and doesn’t need fixing',
+      'Challenges the "everything happens for a reason" mentality',
+      'Written by a therapist who lost her partner suddenly',
+    ],
+  },
+  {
+    title: 'A Grief Observed',
+    author: 'C.S. Lewis',
+    bestFor: 'Those comfortable with a Christian perspective and a philosophical slant',
+    whyItHelps: [
+      'Raw journal entries from Lewis after losing his wife',
+      'Honest reflections on anger at God and deep spiritual crisis',
+    ],
+  },
+  {
+    title: 'Option B: Facing Adversity, Building Resilience, and Finding Joy',
+    author: 'Sheryl Sandberg',
+    bestFor: 'Widows with young children, focused on resilience',
+    whyItHelps: ['Practical advice on building resilience', 'Research-based strategies for coping'],
+  },
+  {
+    title: "I Wasn't Ready to Say Goodbye",
+    author: 'Brook Noel and Pamela Blair',
+    bestFor: 'Understanding many types of grief scenarios, including the loss of a spouse',
+    whyItHelps: [
+      'Specific to sudden loss',
+      'Addresses shock and trauma',
+      'Offers practical coping strategies',
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -23,34 +120,67 @@ import { SITE } from '../../config/site';
 
     <div class="stack">
       <h2>Recommended Websites</h2>
-      <div class="grid grid-3">
-        <Card title="Recommended website" eyebrow="Coming Soon">
-          Ajai is putting together her list of trusted websites for grief support and resources —
-          check back soon.
-        </Card>
-        <Card title="Recommended website" eyebrow="Coming Soon">
-          Ajai is putting together her list of trusted websites for grief support and resources —
-          check back soon.
-        </Card>
-        <Card title="Recommended website" eyebrow="Coming Soon">
-          Ajai is putting together her list of trusted websites for grief support and resources —
-          check back soon.
-        </Card>
+      <div class="grid grid-2 card-grid grid-trailing-center">
+        {
+          websites.map((site) => (
+            <Card title={site.title} href={site.href} external class="text-center">
+              <p class="chip">{site.domain}</p>
+              <p>{site.description}</p>
+              {site.contact && (
+                <div class="card-contact">
+                  <p class="card-contact-line">
+                    <MapPin aria-hidden="true" />
+                    <a href={site.contact.mapsHref} target="_blank" rel="noopener noreferrer">
+                      {site.contact.address}
+                    </a>
+                  </p>
+                  <p class="card-contact-line">
+                    <Phone aria-hidden="true" />
+                    <a href={site.contact.phoneHref}>{site.contact.phone}</a>
+                  </p>
+                  <p class="card-contact-line">
+                    <Mail aria-hidden="true" />
+                    <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+                  </p>
+                </div>
+              )}
+            </Card>
+          ))
+        }
       </div>
     </div>
 
+    <hr class="section-divider" />
+
     <div class="stack">
       <h2>Recommended Books</h2>
-      <div class="grid grid-3">
-        <Card title="Recommended book" eyebrow="Coming Soon">
-          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
-        </Card>
-        <Card title="Recommended book" eyebrow="Coming Soon">
-          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
-        </Card>
-        <Card title="Recommended book" eyebrow="Coming Soon">
-          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
-        </Card>
+      <p>
+        While every woman has a different grief journey, certain books and resources have proven
+        to be helpful to me and others I support. Take your time and drink from the experiences
+        and stories of other women as you read and soak in the wisdom and knowledge.
+      </p>
+      <div class="book-list">
+        {
+          books.map((book) => (
+            <article class="book-row">
+              {book.favorite && <p class="kicker kicker-accent">Ajai's Personal Favorite</p>}
+              <h3 class="book-row-title">{book.title}</h3>
+              <p class="byline">by {book.author}</p>
+              {book.note && <p>{book.note}</p>}
+              <p class="book-best-for">
+                <strong>Best for:</strong> {book.bestFor}
+              </p>
+              <ul class="check-list">
+                {book.whyItHelps.map((item) => (
+                  <li>
+                    <Check aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>

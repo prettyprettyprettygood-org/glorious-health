@@ -1,22 +1,47 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/ui/Card.astro';
 import { SITE } from '../../config/site';
+
+const posts = (await getCollection('sisterhood')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
 ---
 
 <BaseLayout
   title={`Sisterhood — ${SITE.name}`}
   description="Reflections and writing from Ajai Blue-Saunders, coming soon."
 >
-  <section class="section stack hero">
-    <div>
-      <p class="kicker">Sisterhood</p>
-      <h1>Stories from the healing journey.</h1>
+  <section class="section stack">
+    <div class="section-heading-row">
+      <div>
+        <p class="kicker">Sisterhood</p>
+        <h1>Stories from the healing journey.</h1>
+        <p>
+          Ajai's blog and writing will live here — reflections, encouragement, and wisdom from a
+          woman walking this journey herself. She's sorting through and preparing them now, so
+          check back soon. Below is a preview of the layout with placeholder text.
+        </p>
+      </div>
+      <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
     </div>
-    <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
-    <p class="hero-copy">
-      Ajai's blog and writing will live here — reflections, encouragement, and wisdom from a woman
-      walking this journey herself. She's sorting through and preparing them now, so check back
-      soon.
-    </p>
+
+    <div class="grid grid-3 card-grid">
+      {
+        posts.map((post) => (
+          <Card
+            title={post.data.title}
+            eyebrow={dateFormatter.format(post.data.date)}
+            href={`/sisterhood/${post.id}/`}
+          >
+            {post.data.draft && <p class="chip">Draft</p>}
+            <p>{post.data.excerpt}</p>
+          </Card>
+        ))
+      }
+    </div>
   </section>
 </BaseLayout>

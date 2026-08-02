@@ -29,7 +29,7 @@ const reasons = [
           <p class="info-block-eyebrow">Send a Message</p>
           <h2>We'd love to hear from you.</h2>
         </div>
-        <form class="form" data-contact-form novalidate>
+        <form class="form" novalidate>
           <div class="form-field">
             <label class="form-label" for="contact-name">Name</label>
             <input class="form-input" type="text" id="contact-name" name="name" required />
@@ -67,43 +67,11 @@ const reasons = [
           eyebrow="Churches & Funeral Homes"
           class="info-block--secondary"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. A printable one-page referral
-          flyer is planned alongside this site.
+          If you work with grieving families, we welcome partnerships with churches and funeral
+          homes to help widows find their way to a gathering. A printable one-page referral flyer
+          is planned alongside this site.
         </InfoBlock>
       </div>
     </div>
   </section>
-
-  <script is:inline define:vars={{ contactEmail: SITE.contactEmail }}>
-    (() => {
-      const form = document.querySelector('[data-contact-form]');
-      if (!(form instanceof HTMLFormElement)) {
-        return;
-      }
-
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const name = String(data.get('name') ?? '').trim();
-        const email = String(data.get('email') ?? '').trim();
-        const phone = String(data.get('phone') ?? '').trim();
-        const reason = String(data.get('reason') ?? '').trim();
-        const message = String(data.get('message') ?? '').trim();
-
-        const subject = `Website message from ${name || 'a visitor'}`;
-        const bodyLines = [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          phone ? `Phone: ${phone}` : null,
-          `Reason: ${reason}`,
-          '',
-          message,
-        ].filter((line) => line !== null);
-
-        const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-        window.location.href = mailto;
-      });
-    })();
-  </script>
 </BaseLayout>
