@@ -209,11 +209,6 @@ a {
   color: var(--tone-secondary);
 }
 
-.brand-t {
-  color: var(--tone-primary);
-  font-weight: 700;
-}
-
 .site-nav ul {
   list-style: none;
   margin: 0;
@@ -449,10 +444,32 @@ a {
   color: var(--tone-secondary);
 }
 
-.hero-logo {
+.hero-logo-frame {
+  position: relative;
   inline-size: min(100%, 40rem);
-  block-size: auto;
   margin-inline: auto;
+}
+
+.hero-logo-frame::before {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--tone-primary) 20%, transparent) 0%,
+    color-mix(in srgb, var(--tone-primary) 8%, transparent) 45%,
+    transparent 72%
+  );
+  filter: blur(48px);
+  z-index: 0;
+}
+
+.hero-logo {
+  position: relative;
+  z-index: 1;
+  inline-size: 100%;
+  block-size: auto;
+  mix-blend-mode: multiply;
 }
 
 .section-heading-row {
@@ -743,6 +760,11 @@ a {
   margin: 0;
 }
 
+.card-heading-center .card-eyebrow,
+.card-heading-center .card-title {
+  text-align: center;
+}
+
 .card-title a {
   text-decoration-color: color-mix(in srgb, var(--tone-primary) 65%, transparent);
   text-decoration-thickness: 2px;
@@ -956,7 +978,8 @@ a {
 
 .book-row {
   display: grid;
-  gap: var(--space-3);
+  grid-template-columns: clamp(6rem, 20vw, 9.5rem) 1fr;
+  gap: var(--space-8);
   padding-block-end: var(--space-8);
   border-bottom: 1px solid color-mix(in srgb, var(--tone-border) 45%, transparent);
 }
@@ -964,6 +987,28 @@ a {
 .book-row:last-child {
   padding-block-end: 0;
   border-bottom: none;
+}
+
+.book-cover-frame {
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-surface);
+  background: var(--tone-surface-strong);
+}
+
+.book-cover {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.book-row-content {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
 }
 
 .book-row-title {
@@ -1134,6 +1179,28 @@ a {
   margin-inline: auto;
 }
 
+.photo-frame {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-surface);
+}
+
+.photo-frame--compact {
+  max-inline-size: 34rem;
+  margin-inline: auto;
+}
+
+.photo-frame--even-gap {
+  margin-block-start: calc(var(--space-24) - var(--space-6));
+}
+
+.photo-frame--even-gap-loose {
+  margin-block-start: calc(var(--space-24) - var(--space-10));
+}
+
 .site-footer {
   border-top: 1px solid var(--tone-border);
   margin-top: var(--space-16);
@@ -1171,8 +1238,18 @@ a {
 }
 
 .footer-links a {
-  color: var(--tone-text);
-  font-weight: 600;
+  color: var(--tone-text-muted);
+  font-weight: 500;
+  transition: color 140ms ease;
+}
+
+.footer-links a:hover {
+  color: var(--tone-primary);
+}
+
+.footer-text {
+  display: grid;
+  gap: 0.2rem;
 }
 
 .footer-copy,

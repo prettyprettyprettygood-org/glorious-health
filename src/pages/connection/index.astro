@@ -10,7 +10,7 @@ const websites = [
     href: 'https://www.hopeforwidows.org',
     domain: 'www.hopeforwidows.org',
     description:
-      "A supportive community that cares. Hope for Widows is a non-profit organization developed by widowed women that strives to offset the financial challenges of and build community among widowed women worldwide. Their vision is to create a strong network of widows.",
+      'A supportive community that cares. Hope for Widows is a non-profit organization developed by widowed women that strives to offset the financial challenges of and build community among widowed women worldwide. Their vision is to create a strong network of widows.',
   },
   {
     title: 'Speaking Grief Documentary',
@@ -54,7 +54,8 @@ const websites = [
 const books = [
   {
     title: "A Widow's Journey: Reflections on Walking Alone",
-    author: 'Gayle Roper',
+    author: 'gayle roper',
+    image: '/images/books/a-widows-journey-book.jpg',
     favorite: true,
     note: 'This little gem of a book allows you to walk alongside the writer as she writes of her emotions following the loss of her beloved husband. Her compassionate words will resonate with your own loss and encourage you through those dark and lonely days. A keepsake!',
     bestFor: 'Reflections on daily life as a widow',
@@ -66,6 +67,7 @@ const books = [
   {
     title: "It's OK That You're Not OK",
     author: 'Megan Devine',
+    image: '/images/books/its-ok-book.jpg',
     bestFor: "Anyone newly grieving who's tired of toxic positivity",
     whyItHelps: [
       'Validates that grief is terrible and doesn’t need fixing',
@@ -76,6 +78,7 @@ const books = [
   {
     title: 'A Grief Observed',
     author: 'C.S. Lewis',
+    image: '/images/books/grief-observed-book.jpg',
     bestFor: 'Those comfortable with a Christian perspective and a philosophical slant',
     whyItHelps: [
       'Raw journal entries from Lewis after losing his wife',
@@ -85,12 +88,14 @@ const books = [
   {
     title: 'Option B: Facing Adversity, Building Resilience, and Finding Joy',
     author: 'Sheryl Sandberg',
+    image: '/images/books/option-b-book.jpg',
     bestFor: 'Widows with young children, focused on resilience',
     whyItHelps: ['Practical advice on building resilience', 'Research-based strategies for coping'],
   },
   {
     title: "I Wasn't Ready to Say Goodbye",
     author: 'Brook Noel and Pamela Blair',
+    image: '/images/books/wasnt-ready-book.jpg',
     bestFor: 'Understanding many types of grief scenarios, including the loss of a spouse',
     whyItHelps: [
       'Specific to sudden loss',
@@ -111,8 +116,8 @@ const books = [
         <p class="kicker">Connection</p>
         <h1>Resources for the journey between gatherings.</h1>
         <p>
-          A running list of websites and books Ajai recommends for widows navigating grief,
-          faith, and healing.
+          A running list of websites and books Ajai recommends for widows navigating grief, faith,
+          and healing.
         </p>
       </div>
       <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
@@ -155,29 +160,41 @@ const books = [
     <div class="stack">
       <h2>Recommended Books</h2>
       <p>
-        While every woman has a different grief journey, certain books and resources have proven
-        to be helpful to me and others I support. Take your time and drink from the experiences
-        and stories of other women as you read and soak in the wisdom and knowledge.
+        While every woman has a different grief journey, certain books and resources have proven to
+        be helpful to me and others I support. Take your time and drink from the experiences and
+        stories of other women as you read and soak in the wisdom and knowledge.
       </p>
       <div class="book-list">
         {
           books.map((book) => (
             <article class="book-row">
-              {book.favorite && <p class="kicker kicker-accent">Ajai's Personal Favorite</p>}
-              <h3 class="book-row-title">{book.title}</h3>
-              <p class="byline">by {book.author}</p>
-              {book.note && <p>{book.note}</p>}
-              <p class="book-best-for">
-                <strong>Best for:</strong> {book.bestFor}
-              </p>
-              <ul class="check-list">
-                {book.whyItHelps.map((item) => (
-                  <li>
-                    <Check aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div class="book-cover-frame">
+                <img
+                  src={book.image}
+                  alt={`Cover of ${book.title} by ${book.author}`}
+                  class="book-cover"
+                  width="160"
+                  height="240"
+                  loading="lazy"
+                />
+              </div>
+              <div class="book-row-content">
+                {book.favorite && <p class="kicker kicker-accent">Ajai's Personal Favorite</p>}
+                <h3 class="book-row-title">{book.title}</h3>
+                <p class="byline">by {book.author}</p>
+                {book.note && <p>{book.note}</p>}
+                <p class="book-best-for">
+                  <strong>Best for:</strong> {book.bestFor}
+                </p>
+                <ul class="check-list">
+                  {book.whyItHelps.map((item) => (
+                    <li>
+                      <Check aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </article>
           ))
         }
