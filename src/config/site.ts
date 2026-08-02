@@ -5,6 +5,7 @@ export const SITE = {
   description: 'A healing journey for widows built on gatherings, connection, and sisterhood.',
   verse: '3 John 1:2',
   nav: [
+    { href: '/', label: 'Home' },
     { href: '/about/', label: 'About' },
     { href: '/gatherings/', label: 'Gatherings' },
     { href: '/connection/', label: 'Connection' },
