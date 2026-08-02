@@ -31,7 +31,12 @@ const reasons = [
           <p class="info-block-eyebrow">Send a Message</p>
           <h2>We'd love to hear from you.</h2>
         </div>
-        <form class="form" action="https://formspree.io/f/mgoggaer" method="POST">
+        <form
+          class="form"
+          action="https://formspree.io/f/mgoggaer"
+          method="POST"
+          data-contact-form
+        >
           <div class="form-field">
             <label class="form-label" for="contact-name">Name</label>
             <input class="form-input" type="text" id="contact-name" name="name" required />
@@ -49,10 +54,19 @@ const reasons = [
             <label class="form-label" for="contact-message">Message</label>
             <textarea class="form-textarea" id="contact-message" name="message" required></textarea>
           </div>
+          <p class="form-error" data-contact-form-error hidden>
+            Something went wrong sending your message. Please try again, or email us directly.
+          </p>
           <div class="hero-actions hero-actions--end">
-            <button type="submit" class="btn btn-solid btn-md">Send Message</button>
+            <button type="submit" class="btn btn-solid btn-md" data-contact-form-submit>
+              Send Message
+            </button>
           </div>
         </form>
+        <div class="form-success" data-contact-form-success hidden>
+          <p class="form-success-title">Thank you for reaching out.</p>
+          <p>We've received your message and will be in touch soon.</p>
+        </div>
       </div>
 
       <div class="stack">
@@ -83,3 +97,52 @@ const reasons = [
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector('[data-contact-form]');
+    if (!(form instanceof HTMLFormElement) || form.dataset.contactFormEnhanced === 'true') {
+      return;
+    }
+    form.dataset.contactFormEnhanced = 'true';
+
+    const submitButton = form.querySelector('[data-contact-form-submit]');
+    const errorMessage = form.querySelector('[data-contact-form-error]');
+    const successMessage = document.querySelector('[data-contact-form-success]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (errorMessage instanceof HTMLElement) {
+        errorMessage.hidden = true;
+      }
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        if (successMessage instanceof HTMLElement) {
+          form.hidden = true;
+          successMessage.hidden = false;
+        }
+      } catch {
+        if (errorMessage instanceof HTMLElement) {
+          errorMessage.hidden = false;
+        }
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  })();
+</script>

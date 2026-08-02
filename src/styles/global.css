@@ -598,6 +598,7 @@ a {
   text-decoration: none;
   font-weight: 700;
   border: 1px solid transparent;
+  cursor: pointer;
   transition:
     background-color 140ms ease,
     color 140ms ease,
@@ -1241,6 +1242,29 @@ a {
 .form-hint {
   font-size: 0.85rem;
   color: var(--tone-text-muted);
+}
+
+.form-error {
+  font-size: 0.85rem;
+  color: #b3261e;
+  margin: 0;
+}
+
+.form-success {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  background: var(--tone-surface);
+}
+
+.form-success-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--tone-secondary);
 }
 
 .about-grid {
