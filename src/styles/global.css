@@ -997,12 +997,92 @@ a {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-surface);
   background: var(--tone-surface-strong);
+  container-type: inline-size;
 }
 
 .book-cover {
   inline-size: 100%;
   block-size: 100%;
   object-fit: contain;
+}
+
+.book-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 4cqw, var(--space-2));
+  padding: clamp(0.4rem, 6cqw, var(--space-3)) clamp(0.35rem, 5cqw, var(--space-2));
+  border-radius: calc(var(--radius-md) - 0.2rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--tone-primary-contrast) 45%, transparent);
+  border-radius: calc(var(--radius-md) - 0.45rem);
+  pointer-events: none;
+}
+
+.book-placeholder-icon {
+  width: clamp(1rem, 13cqw, 1.6rem);
+  height: clamp(1rem, 13cqw, 1.6rem);
+  color: var(--tone-primary-contrast);
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.book-placeholder-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 10.5cqw, 0.9rem);
+  line-height: 1.25;
+  color: var(--tone-primary-contrast);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.book-placeholder-author {
+  margin: 0;
+  font-size: clamp(0.5rem, 5.5cqw, 0.65rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tone-primary-contrast) 75%, transparent);
+  flex-shrink: 0;
+}
+
+.book-placeholder-0 {
+  background: linear-gradient(160deg, var(--tone-primary) 0%, var(--tone-primary-hover) 100%);
+}
+
+.book-placeholder-1 {
+  background: linear-gradient(160deg, var(--tone-secondary) 0%, var(--tone-secondary-hover) 100%);
+}
+
+.book-placeholder-2 {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--tone-primary) 65%, var(--tone-secondary)) 0%,
+    var(--tone-primary-hover) 100%
+  );
+}
+
+.book-placeholder-3 {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--tone-secondary) 55%, var(--tone-primary)) 0%,
+    var(--tone-secondary-hover) 100%
+  );
 }
 
 .book-row-content {

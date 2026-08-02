@@ -1,0 +1,22 @@
+---
+import { BookHeart } from '@lucide/astro';
+
+interface Props {
+  title: string;
+  author: string;
+  variant?: number;
+}
+
+const { title, author, variant = 0 } = Astro.props;
+const paletteIndex = ((variant % 4) + 4) % 4;
+---
+
+<div
+  class={`book-cover book-placeholder book-placeholder-${paletteIndex}`}
+  role="img"
+  aria-label={`Cover of ${title} by ${author}`}
+>
+  <BookHeart class="book-placeholder-icon" aria-hidden="true" />
+  <p class="book-placeholder-title" aria-hidden="true">{title}</p>
+  <p class="book-placeholder-author" aria-hidden="true">{author}</p>
+</div>

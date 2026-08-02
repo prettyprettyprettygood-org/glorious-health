@@ -2,6 +2,7 @@
 import { Check, MapPin, Phone, Mail } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
+import BookCoverPlaceholder from '../../components/ui/BookCoverPlaceholder.astro';
 import { SITE } from '../../config/site';
 
 const websites = [
@@ -55,7 +56,6 @@ const books = [
   {
     title: "A Widow's Journey: Reflections on Walking Alone",
     author: 'gayle roper',
-    image: '/images/books/a-widows-journey-book.jpg',
     favorite: true,
     note: 'This little gem of a book allows you to walk alongside the writer as she writes of her emotions following the loss of her beloved husband. Her compassionate words will resonate with your own loss and encourage you through those dark and lonely days. A keepsake!',
     bestFor: 'Reflections on daily life as a widow',
@@ -67,7 +67,6 @@ const books = [
   {
     title: "It's OK That You're Not OK",
     author: 'Megan Devine',
-    image: '/images/books/its-ok-book.jpg',
     bestFor: "Anyone newly grieving who's tired of toxic positivity",
     whyItHelps: [
       'Validates that grief is terrible and doesn’t need fixing',
@@ -78,7 +77,6 @@ const books = [
   {
     title: 'A Grief Observed',
     author: 'C.S. Lewis',
-    image: '/images/books/grief-observed-book.jpg',
     bestFor: 'Those comfortable with a Christian perspective and a philosophical slant',
     whyItHelps: [
       'Raw journal entries from Lewis after losing his wife',
@@ -88,14 +86,12 @@ const books = [
   {
     title: 'Option B: Facing Adversity, Building Resilience, and Finding Joy',
     author: 'Sheryl Sandberg',
-    image: '/images/books/option-b-book.jpg',
     bestFor: 'Widows with young children, focused on resilience',
     whyItHelps: ['Practical advice on building resilience', 'Research-based strategies for coping'],
   },
   {
     title: "I Wasn't Ready to Say Goodbye",
     author: 'Brook Noel and Pamela Blair',
-    image: '/images/books/wasnt-ready-book.jpg',
     bestFor: 'Understanding many types of grief scenarios, including the loss of a spouse',
     whyItHelps: [
       'Specific to sudden loss',
@@ -166,17 +162,10 @@ const books = [
       </p>
       <div class="book-list">
         {
-          books.map((book) => (
+          books.map((book, index) => (
             <article class="book-row">
               <div class="book-cover-frame">
-                <img
-                  src={book.image}
-                  alt={`Cover of ${book.title} by ${book.author}`}
-                  class="book-cover"
-                  width="160"
-                  height="240"
-                  loading="lazy"
-                />
+                <BookCoverPlaceholder title={book.title} author={book.author} variant={index} />
               </div>
               <div class="book-row-content">
                 {book.favorite && <p class="kicker kicker-accent">Ajai's Personal Favorite</p>}
