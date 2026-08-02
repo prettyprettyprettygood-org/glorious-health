@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import { SITE } from '../../config/site';
+---
+
+<BaseLayout
+  title={`Connection — ${SITE.name}`}
+  description="Recommended websites and books to support your healing journey between gatherings."
+>
+  <section class="section stack">
+    <div class="section-heading-row">
+      <div>
+        <p class="kicker">Connection</p>
+        <h1>Resources for the journey between gatherings.</h1>
+        <p>
+          A running list of websites and books Ajai recommends for widows navigating grief,
+          faith, and healing.
+        </p>
+      </div>
+      <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
+    </div>
+
+    <div class="stack">
+      <h2>Recommended Websites</h2>
+      <div class="grid grid-3">
+        <Card title="Recommended website" eyebrow="Coming Soon">
+          Ajai is putting together her list of trusted websites for grief support and resources —
+          check back soon.
+        </Card>
+        <Card title="Recommended website" eyebrow="Coming Soon">
+          Ajai is putting together her list of trusted websites for grief support and resources —
+          check back soon.
+        </Card>
+        <Card title="Recommended website" eyebrow="Coming Soon">
+          Ajai is putting together her list of trusted websites for grief support and resources —
+          check back soon.
+        </Card>
+      </div>
+    </div>
+
+    <div class="stack">
+      <h2>Recommended Books</h2>
+      <div class="grid grid-3">
+        <Card title="Recommended book" eyebrow="Coming Soon">
+          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
+        </Card>
+        <Card title="Recommended book" eyebrow="Coming Soon">
+          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
+        </Card>
+        <Card title="Recommended book" eyebrow="Coming Soon">
+          Ajai's reading list for grief, healing, and faith is on its way — check back soon.
+        </Card>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

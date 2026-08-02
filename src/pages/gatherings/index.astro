@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TimelineItem from '../../components/ui/TimelineItem.astro';
+import { SITE } from '../../config/site';
+---
+
+<BaseLayout
+  title={`Gatherings & Workshops — ${SITE.name}`}
+  description="Guided workshops for grief and healing, led by Ajai Blue-Saunders."
+>
+  <section class="section stack stack-loose">
+    <div class="section-heading-row">
+      <div>
+        <p class="kicker">Gatherings</p>
+        <h1>Guided sessions for grief and healing.</h1>
+        <p>
+          Led by Ajai Blue-Saunders, these workshops blend faith, herbal wisdom, and grief
+          education to help widows heal in body, mind, and spirit.
+        </p>
+      </div>
+      <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
+    </div>
+    <ol class="timeline">
+      <TimelineItem title="Common Remedies to Stay Strong in the Midst of Your Grief Journey">
+        <p class="timeline-scripture">
+          "He heals the brokenhearted and binds up their wounds." — Psalm 147:3
+        </p>
+        <p>
+          Grief is not just emotional — it impacts your sleep, immune system, digestion, memory,
+          mood, and even your ability to make simple decisions. In this restorative and
+          faith-centered workshop, we uncover how grief affects the whole body and explore
+          practical, holistic remedies that support healing from the inside out. This workshop
+          offers encouragement and tools to help you remain strong — spiritually, emotionally, and
+          physically — while allowing God's healing balm to minister to every wounded place.
+        </p>
+      </TimelineItem>
+      <TimelineItem title="What's the Real Tea?">
+        <p class="timeline-scripture">
+          "The leaves of the tree are for the healing of the nations." — Revelation 22:2
+        </p>
+        <p>
+          There's wisdom steeped in every cup. "What's the Real Tea?" invites you to discover the
+          power of natural herbal teas for every season of life — grief, stress, immunity, rest,
+          and renewal. Whether you're seeking comfort, clarity, or immune support, this workshop
+          equips you with simple, effective, God-created remedies to nourish body and spirit — one
+          cup at a time.
+        </p>
+      </TimelineItem>
+      <TimelineItem title="Natural Cures for Jangled Nerves">
+        <p class="timeline-scripture">
+          "You will keep in perfect peace those whose minds are steadfast, because they trust in
+          You." — Isaiah 26:3
+        </p>
+        <p>
+          Anxiety, racing thoughts, tension, and overwhelm can feel relentless — especially after
+          loss. This empowering workshop focuses on proven, natural ways to calm your nervous
+          system, sharpen your focus, and reclaim your peace. You'll leave with actionable
+          strategies to soothe "jangled nerves," quiet mental chatter, and cultivate a steady,
+          anchored mind rooted in God's peace.
+        </p>
+      </TimelineItem>
+      <TimelineItem title="The Widow's Bill of Rights">
+        <p class="timeline-scripture">
+          "Above all else, guard your heart, for everything you do flows from it." — Proverbs 4:23
+        </p>
+        <p>
+          "You're still grieving?" "At least he's in a better place." "God must have needed
+          another angel." Widows often face a second battle — navigating unhelpful comments,
+          unsolicited advice, and unrealistic expectations. This engaging and interactive workshop
+          equips you with emotional tools and spiritual armor to distinguish supportive help from
+          harmful words. You'll leave fortified, confident, and empowered — with clarity about your
+          rights, your voice, and your healing timeline.
+        </p>
+      </TimelineItem>
+      <TimelineItem title="Jeremiah 29:11 — Using Scripture to Heal">
+        <p class="timeline-scripture">
+          "For I know the plans I have for you… plans to prosper you and not to harm you, plans to
+          give you hope and a future." — Jeremiah 29:11
+        </p>
+        <p>
+          This beloved and often-quoted scripture is frequently shared during times of grief — but
+          what did it truly mean in its original context? And how does it genuinely apply to loss,
+          suffering, and restoration? Rather than using scripture as a quick bandage, this session
+          invites deeper understanding — revealing how God's plans include hope even in seasons we
+          never would have chosen.
+        </p>
+      </TimelineItem>
+    </ol>
+  </section>
+</BaseLayout>

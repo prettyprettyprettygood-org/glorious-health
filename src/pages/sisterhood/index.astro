@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+---
+
+<BaseLayout
+  title={`Sisterhood — ${SITE.name}`}
+  description="Reflections and writing from Ajai Blue-Saunders, coming soon."
+>
+  <section class="section stack hero">
+    <div>
+      <p class="kicker">Sisterhood</p>
+      <h1>Stories from the healing journey.</h1>
+    </div>
+    <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
+    <p class="hero-copy">
+      Ajai's blog and writing will live here — reflections, encouragement, and wisdom from a woman
+      walking this journey herself. She's sorting through and preparing them now, so check back
+      soon.
+    </p>
+  </section>
+</BaseLayout>

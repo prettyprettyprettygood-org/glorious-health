@@ -3,52 +3,13 @@ import { Heart, Sprout, Users } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
-import Feature from '../components/ui/Feature.astro';
-import TimelineItem from '../components/ui/TimelineItem.astro';
-import InfoBlock from '../components/ui/InfoBlock.astro';
 import { SITE } from '../config/site';
 ---
 
 <BaseLayout title={`${SITE.name} — ${SITE.tagline}`} description={SITE.description}>
   <section class="section hero stack">
-    <div class="hero-title">
-      <h1 class="wordmark">
-        <span class="wordmark-primary">Glorious</span>
-        <span class="wordmark-secondary" aria-label="Health">
-          <span aria-hidden="true">Heal<span class="wordmark-t">&#x271D;</span>h</span>
-        </span>
-      </h1>
-      <img src="/images/dove.png" alt="" class="hero-dove" width="220" height="270" />
-    </div>
-
-    <p class="wordmark-tagline">{SITE.tagline}</p>
-
-    <ul class="hero-pillars">
-      <li class="hero-pillar">
-        <span class="pillar-icon pillar-icon--sm pillar-icon--primary" aria-hidden="true">
-          <Sprout />
-        </span>
-        Gatherings
-      </li>
-      <li class="hero-pillar">
-        <span class="pillar-icon pillar-icon--sm pillar-icon--secondary" aria-hidden="true">
-          <Users />
-        </span>
-        Connection
-      </li>
-      <li class="hero-pillar">
-        <span class="pillar-icon pillar-icon--sm pillar-icon--primary" aria-hidden="true">
-          <Heart />
-        </span>
-        Sisterhood
-      </li>
-    </ul>
-
-    <p class="hero-verse-wrap">
-      <span class="hero-verse-ivy" aria-hidden="true"></span>
-      <span class="hero-verse-halo" aria-hidden="true"></span>
-      <span class="hero-verse">{SITE.verse}</span>
-    </p>
+    <h1 class="visually-hidden">{SITE.name} — {SITE.tagline}</h1>
+    <img src="/images/logo.png" alt="" class="hero-logo" width="1050" height="600" />
 
     <p class="hero-copy">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
@@ -56,35 +17,8 @@ import { SITE } from '../config/site';
       walking a healing journey after loss.
     </p>
     <div class="hero-actions">
-      <Button href="#contact" type="button">Join a Gathering</Button>
-      <Button href="#about" type="button" variant="outline">Meet Our Founder</Button>
-    </div>
-  </section>
-
-  <section id="about" class="section stack">
-    <div class="grid grid-2 about-grid">
-      <img
-        src="/images/support.jpg"
-        alt="Four friends standing arm-in-arm, looking out over a sunset landscape"
-        class="about-photo"
-        width="1920"
-        height="1280"
-      />
-      <div class="stack">
-        <p class="kicker">Our Story</p>
-        <h2>Meet Our Founder</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-        </p>
-        <p>
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum, sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium.
-        </p>
-      </div>
+      <Button href="/gatherings/" type="button">Join a Gathering</Button>
+      <Button href="/about/" type="button" variant="outline">Meet Our Founder</Button>
     </div>
   </section>
 
@@ -93,104 +27,44 @@ import { SITE } from '../config/site';
       <p class="kicker">What We Offer</p>
       <h2>Gatherings, connection, and sisterhood.</h2>
     </div>
-    <div class="grid grid-3">
-      <Feature title="Gatherings" eyebrow="In-Person & Online">
+    <div class="grid grid-3 card-grid">
+      <Card title="Gatherings" eyebrow="In-Person & Online" href="/gatherings/">
         <Fragment slot="icon">
           <span class="pillar-icon pillar-icon--primary" aria-hidden="true">
             <Sprout />
           </span>
         </Fragment>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua.
-      </Feature>
-      <Feature title="Connection" eyebrow="Small Groups">
+        Workshops that blend faith, herbal wisdom, and grief education to help widows heal in body,
+        mind, and spirit.
+      </Card>
+      <Card title="Connection" eyebrow="Resources" href="/connection/">
         <Fragment slot="icon">
           <span class="pillar-icon pillar-icon--secondary" aria-hidden="true">
             <Users />
           </span>
         </Fragment>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat duis aute irure.
-      </Feature>
-      <Feature title="Sisterhood" eyebrow="Ongoing Support">
+        Recommended websites and books to support your healing journey between gatherings.
+      </Card>
+      <Card title="Sisterhood" eyebrow="Reflections & Writing" href="/sisterhood/">
         <Fragment slot="icon">
           <span class="pillar-icon pillar-icon--primary" aria-hidden="true">
             <Heart />
           </span>
         </Fragment>
-        Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur
-        sint occaecat cupidatat.
-      </Feature>
-    </div>
-  </section>
-
-  <section id="workshops" class="section stack">
-    <div>
-      <p class="kicker">Workshops</p>
-      <h2>Guided sessions for grief and healing.</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit — workshop names and schedules
-        coming soon.
-      </p>
-    </div>
-    <ol class="timeline">
-      <TimelineItem title="Workshop One" eyebrow="Coming Soon">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua.
-      </TimelineItem>
-      <TimelineItem title="Workshop Two" eyebrow="Coming Soon">
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </TimelineItem>
-      <TimelineItem title="Workshop Three" eyebrow="Coming Soon">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur.
-      </TimelineItem>
-    </ol>
-  </section>
-
-  <section id="blog" class="section stack">
-    <div>
-      <p class="kicker">From the Blog</p>
-      <h2>Stories from the healing journey.</h2>
-    </div>
-    <div class="grid grid-3">
-      <Card title="Lorem Ipsum Dolor Sit Amet" eyebrow="Reflection">
-        Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua ut enim ad minim veniam.
-      </Card>
-      <Card title="Quis Nostrud Exercitation" eyebrow="Encouragement">
-        Ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in
-        reprehenderit in voluptate.
-      </Card>
-      <Card title="Velit Esse Cillum Dolore" eyebrow="Community">
-        Eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui
-        officia deserunt mollit anim.
+        Ajai's blog and writing — encouragement from a woman walking this journey herself.
       </Card>
     </div>
   </section>
 
-  <section id="contact" class="section stack">
-    <div>
-      <p class="kicker">Get In Touch</p>
-      <h2>Reach out and join a gathering.</h2>
-    </div>
-    <div class="grid grid-2">
-      <InfoBlock title="Contact Details" eyebrow="Reach Us">
-        <p>
-          <strong>Email:</strong>
-          <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
-        </p>
-        <p><strong>Address:</strong> [Address coming soon]</p>
-      </InfoBlock>
-      <InfoBlock
-        title="Referral Partners"
-        eyebrow="Churches & Funeral Homes"
-        class="info-block--secondary"
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. A printable one-page referral flyer
-        is planned alongside this site.
-      </InfoBlock>
+  <section class="section stack">
+    <div class="grid grid-2 card-grid">
+      <Card title="Meet Our Founder" eyebrow="About" href="/about/">
+        Ajai Blue-Saunders, Certified Peer Grief Educator — her story, background, and how she
+        ministers to widows.
+      </Card>
+      <Card title="Reach Out" eyebrow="Contact" href="/contact/">
+        Questions about a gathering, a speaking invitation, or grief support? Send Ajai a message.
+      </Card>
     </div>
   </section>
 </BaseLayout>

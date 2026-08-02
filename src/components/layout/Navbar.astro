@@ -1,29 +1,93 @@
 ---
+import { Menu, X } from '@lucide/astro';
 import { SITE } from '../../config/site';
+import Brand from './Brand.astro';
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
 <header class="site-header">
   <div class="site-header-inner container">
-    <a href="/" class="brand" aria-label={`${SITE.name} home`}>
-      <span class="brand-kicker">{SITE.tagline}</span>
-      <span class="brand-wordmark">
-        <span class="brand-primary">Glorious</span>{' '}
-        <span class="brand-secondary" aria-label="Health">
-          <span aria-hidden="true">Heal<span class="brand-t">&#x271D;</span>h</span>
-        </span>
-      </span>
-    </a>
+    <Brand />
 
-    <nav aria-label="Primary" class="site-nav">
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Toggle menu"
+      data-nav-toggle
+    >
+      <Menu aria-hidden="true" class="nav-toggle-icon-open" />
+      <X aria-hidden="true" class="nav-toggle-icon-close" />
+    </button>
+
+    <nav aria-label="Primary" class="site-nav" id="primary-nav">
       <ul>
         {
           SITE.nav.map((item) => (
             <li>
-              <a href={item.href}>{item.label}</a>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
             </li>
           ))
         }
       </ul>
     </nav>
   </div>
+
+  <script is:inline>
+    (() => {
+      const toggle = document.querySelector('[data-nav-toggle]');
+      const nav = document.getElementById('primary-nav');
+      if (!(toggle instanceof HTMLButtonElement) || !nav) {
+        return;
+      }
+
+      const closeNav = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+      };
+
+      const openNav = () => {
+        toggle.setAttribute('aria-expanded', 'true');
+        nav.classList.add('is-open');
+      };
+
+      toggle.addEventListener('click', () => {
+        if (toggle.getAttribute('aria-expanded') === 'true') {
+          closeNav();
+        } else {
+          openNav();
+        }
+      });
+
+      nav.addEventListener('click', (event) => {
+        if (event.target instanceof HTMLAnchorElement) {
+          closeNav();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeNav();
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!(event.target instanceof Node)) {
+          return;
+        }
+        if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+          closeNav();
+        }
+      });
+    })();
+  </script>
 </header>

@@ -27,16 +27,24 @@ For full question prompts, see docs/PROJECT_BRIEF_TEMPLATE.md and fill out each 
 ## Scope
 
 - Project mode: content-first
-- Planned pages/routes: Single-page site for now — all sections below live on one route, nav links scroll to in-page anchors (no multi-route site yet).
+- Planned pages/routes: Multi-route site — moved off the single-page anchor-nav layout once real
+  content (bio, workshops, Connection resources, Sisterhood writing, contact) outgrew it.
 
-1. `/` — Hero, About/Bio, Pillars, Workshops, Blog/Resources, Contact (all as anchored sections)
+1. `/` — Trimmed hero + pillar teaser linking out to the pages below
+2. `/about/` — Founder bio (Ajai Blue-Saunders) + headshot
+3. `/gatherings/` — Workshop topics (formerly "Workshops")
+4. `/connection/` — Recommended websites + recommended books (placeholder entries until client sends the actual lists)
+5. `/sisterhood/` — Ajai's blog/writing (empty "coming soon" state until she uploads posts)
+6. `/contact/` — Contact form + contact details
 
 ## Feature Levels
 
 - Auth/login: none
 - Ecommerce/cart/checkout: none
 - Scheduling/calendars: none
-- Contact forms/email: none (mailto link only for now — functional form is a phase-two ask)
+- Contact forms/email: client-side mailto form live at `/contact/` (builds a `mailto:` link from
+  the form fields, no backend/server route — see `docs/agents/template-maintainer/BACKEND_ENABLEMENT.md`
+  for when that would change)
 - CMS/content editing: none
 
 ## Operations
@@ -48,17 +56,21 @@ For full question prompts, see docs/PROJECT_BRIEF_TEMPLATE.md and fill out each 
 
 ## Open Questions / Not Yet Provided
 
-- Actual logo file (only seen as a chat image, not a usable asset — need SVG/PNG export for favicon, hero, and any flyer)
-- Real bio copy + headshot photo
-- Workshop names and descriptions
-- Blog post content
-- Physical address
+- ~~Actual logo file~~ — resolved: high-res `public/images/logo.png` received, palette re-sampled from it.
+- ~~Real bio copy + headshot photo~~ — resolved: live on `/about/`.
+- ~~Workshop names and descriptions~~ — resolved: live on `/gatherings/`.
+- ~~Physical address~~ — resolved: P.O. Box 9837, Henrico, VA 23228, live on `/contact/`.
+- Connection resource lists: client confirmed a websites list and a books list belong under
+  Connection, but the actual titles/URLs weren't included with that request — `/connection/`
+  currently has clearly-labeled placeholder entries pending the real lists.
+- Blog post content: Sisterhood pillar page is live at `/sisterhood/` with a "coming soon" empty
+  state; client said she'll send posts "maybe next week."
 - One-page flyer for churches/funeral homes: client clearly wants this (to market to churches and funeral homes); Afton is unsure of the best approach since this is print/flyer design, not web dev. Options to decide: (a) Afton designs it on Vistaprint/Canva, (b) build a single printable page on this site styled like a flyer that can be linked or PDF'd. Not started.
 
 ## Done Definition
 
 - Handoff must include:
 
-1. Single-page draft site with lorem ipsum placeholders in place of missing copy, using the brand palette from the logo.
+1. Multi-page draft site with lorem ipsum placeholders only where copy hasn't been provided yet, using the brand palette sampled from the real logo.
 2. Passing `npm run validate`.
 3. List of open items above resolved or explicitly deferred with the client.

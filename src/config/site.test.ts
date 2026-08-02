@@ -2,17 +2,17 @@ import { describe, expect, it } from 'vitest';
 import { SITE } from './site';
 
 describe('SITE config', () => {
-  it('every nav item has a matching footer link pointing at the same section', () => {
+  it('every nav item has a matching footer link pointing at the same route', () => {
     for (const item of SITE.nav) {
       const footerMatch = SITE.footerLinks.find((link) => link.label === item.label);
       expect(footerMatch).toBeDefined();
-      expect(footerMatch?.href).toBe(`/${item.href}`);
+      expect(footerMatch?.href).toBe(item.href);
     }
   });
 
-  it('nav hrefs are in-page anchors', () => {
+  it('nav hrefs are absolute site routes', () => {
     for (const item of SITE.nav) {
-      expect(item.href.startsWith('#')).toBe(true);
+      expect(item.href.startsWith('/')).toBe(true);
     }
   });
 
