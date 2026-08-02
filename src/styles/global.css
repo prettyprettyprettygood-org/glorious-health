@@ -1259,6 +1259,10 @@ a {
   background: var(--tone-surface);
 }
 
+.form-success[hidden] {
+  display: none;
+}
+
 .form-success-title {
   font-family: var(--font-heading);
   font-weight: 500;
