@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StyledDropdown from '../../components/ui/StyledDropdown.astro';
+import { ADMIN_CHANGE_LOG } from '../../data/adminChangeLog';
+
+const pages = ['Home', 'About', 'Gatherings', 'Connection', 'Sisterhood', 'Contact', 'Other'];
+const requestTypes = [
+  { value: 'page', label: 'Page Update' },
+  { value: 'blog', label: 'New Blog Post' },
+];
+---
+
+<BaseLayout title="Admin — Website Requests" robots="noindex">
+  <section class="section stack stack-loose">
+    <div class="admin-login-wrap" data-admin-gate>
+      <div class="card admin-login-card">
+        <div class="form-card-heading">
+          <p class="info-block-eyebrow">Admin Login</p>
+          <h2>Welcome, Ajai!</h2>
+          <p class="form-hint">Enter the password to view and submit website requests.</p>
+        </div>
+        <form class="form" data-admin-password-form>
+          <div class="form-field">
+            <label class="form-label" for="admin-password">Password</label>
+            <input
+              class="form-input"
+              type="password"
+              id="admin-password"
+              name="password"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <p class="form-error" data-admin-password-error hidden>
+            Incorrect password. Please try again.
+          </p>
+          <div class="hero-actions hero-actions--end">
+            <button type="submit" class="btn btn-solid btn-md">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="stack stack-loose" data-admin-content hidden>
+      <div class="stack">
+        <div class="section-heading-row">
+          <div>
+            <p class="kicker">Request a Change</p>
+            <h1>What would you like updated?</h1>
+          </div>
+        </div>
+        <form
+          class="form"
+          action="https://formspree.io/f/mnpaabkg"
+          method="POST"
+          data-admin-request-form
+        >
+          <StyledDropdown
+            id="admin-request-type"
+            name="requestType"
+            label="Request type"
+            options={requestTypes}
+            value="page"
+          />
+
+          <div class="grid grid-2" data-request-fields="page">
+            <StyledDropdown id="admin-page" name="page" label="Page" options={pages} />
+            <div class="form-field">
+              <label class="form-label" for="admin-section">Section</label>
+              <input
+                class="form-input"
+                type="text"
+                id="admin-section"
+                name="section"
+                placeholder="e.g. Hero, Gatherings List, Contact Info"
+              />
+            </div>
+            <div class="form-field admin-field-full">
+              <label class="form-label" for="admin-page-description">Describe the change</label>
+              <textarea class="form-textarea" id="admin-page-description" name="pageDescription"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="grid grid-2" data-request-fields="blog" hidden>
+            <div class="form-field">
+              <label class="form-label" for="admin-blog-title">Blog title</label>
+              <input class="form-input" type="text" id="admin-blog-title" name="blogTitle" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="admin-blog-date">Date</label>
+              <input class="form-input" type="date" id="admin-blog-date" name="blogDate" />
+            </div>
+            <div class="form-field admin-field-full">
+              <label class="form-label" for="admin-blog-description">Describe the post</label>
+              <textarea class="form-textarea" id="admin-blog-description" name="blogDescription"
+              ></textarea>
+            </div>
+          </div>
+
+          <p class="form-error" data-admin-form-error hidden>
+            Something went wrong sending your request. Please try again.
+          </p>
+          <div class="hero-actions hero-actions--end">
+            <button type="submit" class="btn btn-solid btn-md" data-admin-form-submit>
+              Send Request
+            </button>
+          </div>
+        </form>
+        <div class="form-success" data-admin-form-success hidden>
+          <p class="form-success-title">Request sent.</p>
+          <p>Thanks — I have received your request and will follow up.</p>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <div class="stack">
+        <div class="form-card-heading">
+          <p class="info-block-eyebrow">History</p>
+          <h2>Change Log</h2>
+        </div>
+        {
+          ADMIN_CHANGE_LOG.length > 0 ? (
+            <ul class="admin-change-log">
+              {ADMIN_CHANGE_LOG.map((entry) => (
+                <li class="admin-change-log-entry">
+                  <p class="admin-change-log-date">{entry.date}</p>
+                  <p>{entry.summary}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="form-hint">No changes logged yet.</p>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ adminPassword: 'Celebrate2026!!' }}>
+  (() => {
+    const gate = document.querySelector('[data-admin-gate]');
+    const content = document.querySelector('[data-admin-content]');
+    const passwordForm = document.querySelector('[data-admin-password-form]');
+    const passwordError = document.querySelector('[data-admin-password-error]');
+
+    if (
+      !(gate instanceof HTMLElement) ||
+      !(content instanceof HTMLElement) ||
+      !(passwordForm instanceof HTMLFormElement) ||
+      !(passwordError instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const unlock = () => {
+      gate.hidden = true;
+      content.hidden = false;
+      sessionStorage.setItem('admin-unlocked', 'true');
+    };
+
+    if (sessionStorage.getItem('admin-unlocked') === 'true') {
+      unlock();
+    }
+
+    passwordForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = passwordForm.querySelector('#admin-password');
+      const value = input instanceof HTMLInputElement ? input.value : '';
+
+      if (value === adminPassword) {
+        passwordError.hidden = true;
+        unlock();
+      } else {
+        passwordError.hidden = false;
+      }
+    });
+  })();
+</script>
+
+<script is:inline>
+  (() => {
+    const requestTypeSelect = document.getElementById('admin-request-type');
+    const fieldGroups = document.querySelectorAll('[data-request-fields]');
+
+    if (!(requestTypeSelect instanceof HTMLSelectElement) || fieldGroups.length === 0) {
+      return;
+    }
+
+    const syncFieldGroups = () => {
+      fieldGroups.forEach((group) => {
+        if (!(group instanceof HTMLElement)) {
+          return;
+        }
+
+        const isActive = group.dataset.requestFields === requestTypeSelect.value;
+        group.hidden = !isActive;
+
+        group.querySelectorAll('input, textarea, select').forEach((field) => {
+          if (
+            field instanceof HTMLInputElement ||
+            field instanceof HTMLTextAreaElement ||
+            field instanceof HTMLSelectElement
+          ) {
+            field.disabled = !isActive;
+          }
+        });
+      });
+    };
+
+    requestTypeSelect.addEventListener('change', syncFieldGroups);
+    syncFieldGroups();
+  })();
+</script>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector('[data-admin-request-form]');
+    if (!(form instanceof HTMLFormElement) || form.dataset.adminFormEnhanced === 'true') {
+      return;
+    }
+    form.dataset.adminFormEnhanced = 'true';
+
+    const submitButton = form.querySelector('[data-admin-form-submit]');
+    const errorMessage = form.querySelector('[data-admin-form-error]');
+    const successMessage = document.querySelector('[data-admin-form-success]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (errorMessage instanceof HTMLElement) {
+        errorMessage.hidden = true;
+      }
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        if (successMessage instanceof HTMLElement) {
+          form.hidden = true;
+          successMessage.hidden = false;
+        }
+      } catch {
+        if (errorMessage instanceof HTMLElement) {
+          errorMessage.hidden = false;
+        }
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  })();
+</script>

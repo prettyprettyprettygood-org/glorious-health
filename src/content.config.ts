@@ -8,6 +8,8 @@ const sisterhood = defineCollection({
     date: z.coerce.date(),
     excerpt: z.string(),
     draft: z.boolean().default(true),
+    source: z.enum(['original', 'hopeforwidows']).default('original'),
+    sourceUrl: z.string().url().optional(),
   }),
 });
 

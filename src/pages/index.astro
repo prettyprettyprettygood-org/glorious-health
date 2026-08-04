@@ -1,5 +1,5 @@
 ---
-import { Heart, Sprout, Users } from '@lucide/astro';
+import { ArrowDown, Heart, Sprout, Users } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
@@ -20,6 +20,30 @@ import { SITE } from '../config/site';
     <div class="hero-actions">
       <Button href="/gatherings/" type="button">Join a Gathering</Button>
       <Button href="/about/" type="button" variant="outline">Meet Our Founder</Button>
+    </div>
+    <a href="#pillars" class="hero-scroll-cue" aria-label="Scroll to see more">
+      <ArrowDown aria-hidden="true" />
+    </a>
+  </section>
+
+  <section class="section">
+    <div class="grid feature-panel">
+      <img
+        src="/images/woman-bible.jpg"
+        alt="A woman reading Scripture in a quiet moment"
+        class="feature-panel-photo"
+        width="1920"
+        height="1280"
+      />
+      <div class="feature-panel-content">
+        <p class="kicker">Welcome</p>
+        <h2>A community rooted in faith.</h2>
+        <p>
+          Grief touches every part of life — body, mind, and spirit. Glorious Health Ministries
+          walks alongside widows with Scripture, community, and practical tools for healing, so no
+          one has to carry this journey alone.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -54,6 +78,26 @@ import { SITE } from '../config/site';
         </Fragment>
         Ajai's blog and writing — encouragement from a woman walking this journey herself.
       </Card>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid feature-panel feature-panel--reverse feature-panel--light">
+      <img
+        src="/images/stone-love-table.jpg"
+        alt="A hand-painted stone reading 'For all those we have loved and lost'"
+        class="feature-panel-photo"
+        width="1920"
+        height="1280"
+      />
+      <div class="feature-panel-content">
+        <p class="kicker kicker-accent">In Memory</p>
+        <h2>For all those we have loved and lost.</h2>
+        <p>
+          Every gathering begins the same way — by making space to honor who came before. This
+          ministry exists because grief deserves to be witnessed, not rushed.
+        </p>
+      </div>
     </div>
   </section>
 

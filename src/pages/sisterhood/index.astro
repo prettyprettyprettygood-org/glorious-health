@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import { Search } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
+import StyledDropdown from '../../components/ui/StyledDropdown.astro';
 import { SITE } from '../../config/site';
 
 const posts = (await getCollection('sisterhood')).sort(
@@ -9,11 +11,22 @@ const posts = (await getCollection('sisterhood')).sort(
 );
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
+
+const sourceOptions = [
+  { value: 'all', label: 'All posts' },
+  { value: 'original', label: "Ajai's writing" },
+  { value: 'hopeforwidows', label: 'Hope for Widows Foundation' },
+];
+
+const sortOptions = [
+  { value: 'newest', label: 'Newest first' },
+  { value: 'oldest', label: 'Oldest first' },
+];
 ---
 
 <BaseLayout
   title={`Sisterhood — ${SITE.name}`}
-  description="Reflections and writing from Ajai Blue-Saunders, coming soon."
+  description="Reflections and writing from Ajai Blue-Saunders on the healing journey."
 >
   <section class="section stack">
     <div class="section-heading-row">
@@ -21,35 +34,228 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: '
         <p class="kicker">Sisterhood</p>
         <h1>Stories from the healing journey.</h1>
         <p>
-          Ajai's blog and writing will live here — reflections, encouragement, and wisdom from a
-          woman walking this journey herself. She's sorting through and preparing them now, so
-          check back soon. Below is a preview of the layout with placeholder text.
+          Ajai's blog and writing lives here — reflections, encouragement, and wisdom from a woman
+          walking this journey herself.
         </p>
       </div>
       <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
     </div>
 
-    <div class="grid grid-3 card-grid">
+    <div class="sisterhood-controls">
+      <label class="sisterhood-search" for="sisterhood-search">
+        <span class="sisterhood-search-label">Search</span>
+        <Search aria-hidden="true" />
+        <input
+          type="search"
+          id="sisterhood-search"
+          placeholder="Search posts"
+          aria-label="Search posts"
+          data-sisterhood-search
+        />
+      </label>
+      <StyledDropdown
+        id="sisterhood-source"
+        label="Source"
+        options={sourceOptions}
+        value="all"
+        ariaLabel="Filter by source"
+        className="sisterhood-control"
+      />
+      <StyledDropdown
+        id="sisterhood-sort"
+        label="Sort"
+        options={sortOptions}
+        value="newest"
+        ariaLabel="Sort posts"
+        className="sisterhood-control"
+      />
+    </div>
+
+    <div class="grid grid-3 card-grid" data-sisterhood-grid>
       {
-        posts.map((post) => (
-          <Card
-            title={post.data.title}
-            eyebrow={dateFormatter.format(post.data.date)}
-            href={`/sisterhood/${post.id}/`}
-          >
-            {post.data.draft && <p class="chip">Draft</p>}
-            <p>{post.data.excerpt}</p>
-          </Card>
-        ))
+        posts.map((post) => {
+          const isExternal = post.data.source === 'hopeforwidows';
+          const href = isExternal ? post.data.sourceUrl : `/sisterhood/${post.id}/`;
+
+          return (
+            <div
+              class="sisterhood-card-item"
+              data-post-item
+              data-title={post.data.title.toLowerCase()}
+              data-excerpt={post.data.excerpt.toLowerCase()}
+              data-source={post.data.source}
+              data-date={post.data.date.valueOf()}
+            >
+              <Card
+                title={post.data.title}
+                eyebrow={dateFormatter.format(post.data.date)}
+                href={href}
+                external={isExternal}
+              >
+                {post.data.draft && <p class="chip">Draft</p>}
+                {isExternal && <p class="chip chip-source">From Hope for Widows Foundation</p>}
+                <p>{post.data.excerpt}</p>
+              </Card>
+            </div>
+          );
+        })
       }
     </div>
 
-    <img
-      src="/images/holding-hands.jpg"
-      alt="Two women holding hands in support"
-      class="photo-frame photo-frame--compact photo-frame--even-gap"
-      width="1280"
-      height="853"
-    />
+    <p class="sisterhood-no-results" data-sisterhood-no-results hidden>
+      No posts match your search.
+    </p>
+
+    <div class="sisterhood-pagination" data-sisterhood-pagination>
+      <p class="sisterhood-pagination-summary" data-sisterhood-pagination-summary></p>
+      <nav class="sisterhood-pagination-nav" aria-label="Blog pagination">
+        <button type="button" class="btn btn-outline btn-sm" data-sisterhood-prev>Previous</button>
+        <div class="sisterhood-pagination-pages" data-sisterhood-pages></div>
+        <button type="button" class="btn btn-outline btn-sm" data-sisterhood-next>Next</button>
+      </nav>
+    </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const PAGE_SIZE = 9;
+    const grid = document.querySelector('[data-sisterhood-grid]');
+    const searchInput = document.querySelector('[data-sisterhood-search]');
+    const sourceSelect = document.getElementById('sisterhood-source');
+    const sortSelect = document.getElementById('sisterhood-sort');
+    const noResults = document.querySelector('[data-sisterhood-no-results]');
+    const pagination = document.querySelector('[data-sisterhood-pagination]');
+    const summary = document.querySelector('[data-sisterhood-pagination-summary]');
+    const pagesContainer = document.querySelector('[data-sisterhood-pages]');
+    const prevButton = document.querySelector('[data-sisterhood-prev]');
+    const nextButton = document.querySelector('[data-sisterhood-next]');
+
+    if (
+      !(grid instanceof HTMLElement) ||
+      !(searchInput instanceof HTMLInputElement) ||
+      !(sourceSelect instanceof HTMLSelectElement) ||
+      !(sortSelect instanceof HTMLSelectElement) ||
+      !(noResults instanceof HTMLElement) ||
+      !(pagination instanceof HTMLElement) ||
+      !(summary instanceof HTMLElement) ||
+      !(pagesContainer instanceof HTMLElement) ||
+      !(prevButton instanceof HTMLButtonElement) ||
+      !(nextButton instanceof HTMLButtonElement)
+    ) {
+      return;
+    }
+
+    const items = Array.from(grid.querySelectorAll('[data-post-item]')).filter(
+      (item) => item instanceof HTMLElement
+    );
+
+    let currentPage = 1;
+
+    const getFiltered = () => {
+      const query = searchInput.value.trim().toLowerCase();
+      const sourceFilter = sourceSelect.value;
+
+      const filtered = items.filter((item) => {
+        const matchesQuery =
+          !query ||
+          (item.dataset.title ?? '').includes(query) ||
+          (item.dataset.excerpt ?? '').includes(query);
+        const matchesSource = sourceFilter === 'all' || item.dataset.source === sourceFilter;
+        return matchesQuery && matchesSource;
+      });
+
+      const sortOrder = sortSelect.value;
+      filtered.sort((a, b) => {
+        const diff = Number(a.dataset.date) - Number(b.dataset.date);
+        return sortOrder === 'oldest' ? diff : -diff;
+      });
+
+      return filtered;
+    };
+
+    const goToPage = (page) => {
+      currentPage = page;
+      render();
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const renderPageButtons = (totalPages) => {
+      pagesContainer.replaceChildren();
+
+      for (let page = 1; page <= totalPages; page += 1) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'sisterhood-page-button';
+        button.textContent = String(page);
+        if (page === currentPage) {
+          button.setAttribute('aria-current', 'page');
+        }
+        button.addEventListener('click', () => goToPage(page));
+        pagesContainer.append(button);
+      }
+    };
+
+    const render = () => {
+      const filtered = getFiltered();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      items.forEach((item) => {
+        item.hidden = true;
+      });
+
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+      pageItems.forEach((item) => {
+        item.hidden = false;
+        grid.appendChild(item);
+      });
+
+      noResults.hidden = filtered.length > 0;
+      pagination.hidden = filtered.length === 0;
+
+      if (filtered.length > 0) {
+        summary.textContent = `Showing ${start + 1}–${start + pageItems.length} of ${filtered.length} posts`;
+        renderPageButtons(totalPages);
+      }
+
+      prevButton.disabled = currentPage <= 1;
+      nextButton.disabled = currentPage >= totalPages;
+    };
+
+    searchInput.addEventListener('input', () => {
+      currentPage = 1;
+      render();
+    });
+
+    sourceSelect.addEventListener('change', () => {
+      currentPage = 1;
+      render();
+    });
+
+    sortSelect.addEventListener('change', () => {
+      currentPage = 1;
+      render();
+    });
+
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        goToPage(currentPage - 1);
+      }
+    });
+
+    nextButton.addEventListener('click', () => {
+      const totalPages = Math.max(1, Math.ceil(getFiltered().length / PAGE_SIZE));
+      if (currentPage < totalPages) {
+        goToPage(currentPage + 1);
+      }
+    });
+
+    render();
+  })();
+</script>

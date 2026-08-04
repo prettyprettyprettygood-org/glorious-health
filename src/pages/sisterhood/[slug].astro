@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('sisterhood');
+  const posts = await getCollection('sisterhood', ({ data }) => data.source === 'original');
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -23,12 +23,14 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 <BaseLayout title={`${post.data.title} — ${SITE.name}`} description={post.data.excerpt}>
   <article class="section stack post">
-    <a href="/sisterhood/" class="post-back">
-      <ArrowLeft aria-hidden="true" />
-      Back to Sisterhood
-    </a>
+    <div class="post-top-row">
+      <a href="/sisterhood/" class="post-back">
+        <ArrowLeft aria-hidden="true" />
+        Back to Sisterhood
+      </a>
+      <p class="kicker post-date">{formattedDate}</p>
+    </div>
     <div class="post-header">
-      <p class="kicker">{formattedDate}</p>
       <h1>{post.data.title}</h1>
       {post.data.draft && <p class="chip">Draft</p>}
     </div>
