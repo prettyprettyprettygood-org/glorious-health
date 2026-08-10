@@ -37,14 +37,17 @@ Without reusable layout variants, site builders end up improvising structure and
 ## 1) TopNavLayout
 
 Suggested file:
+
 - src/layouts/TopNavLayout.astro
 
 Use cases:
+
 - Marketing pages
 - Home pages
 - Campaign pages
 
 Characteristics:
+
 - Header with top nav
 - Main content stack
 - Footer
@@ -52,14 +55,17 @@ Characteristics:
 ## 2) SideNavLayout
 
 Suggested file:
+
 - src/layouts/SideNavLayout.astro
 
 Use cases:
+
 - Help center
 - Program directories
 - Resource hubs
 
 Characteristics:
+
 - Persistent side navigation region
 - Main content region
 - Mobile collapse behavior
@@ -67,14 +73,17 @@ Characteristics:
 ## 3) ContentWithAsideLayout
 
 Suggested file:
+
 - src/layouts/ContentWithAsideLayout.astro
 
 Use cases:
+
 - Blog/article pages
 - Long-form service pages
 - Pages with contextual callouts
 
 Characteristics:
+
 - Main content column
 - Optional right/left aside column
 - Predictable responsive stack at narrow widths
@@ -82,14 +91,17 @@ Characteristics:
 ## 4) MinimalLandingLayout
 
 Suggested file:
+
 - src/layouts/MinimalLandingLayout.astro
 
 Use cases:
+
 - Single-purpose campaigns
 - Event signup pages
 - Focused conversion pages
 
 Characteristics:
+
 - Optional reduced header
 - Focused hero/content flow
 - Optional compact footer

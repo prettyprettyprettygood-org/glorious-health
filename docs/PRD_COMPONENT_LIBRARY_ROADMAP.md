@@ -30,46 +30,59 @@ Without a roadmap, component additions can become ad hoc. That reduces consisten
 ## Priority A: High leverage next additions
 
 1. SectionShell
+
 - Standard section wrapper for heading, intro copy, spacing rhythm.
 
 2. StatGrid and CountUpStat
+
 - Coordinate with docs/PRD_MOTION_AND_INTERACTION_COMPONENTS.md.
 
 3. FAQAccordion
+
 - Accessible disclosure pattern for common nonprofit service pages.
 
 4. TestimonialCard and TestimonialGrid
+
 - Reusable social-proof pattern.
 
 5. LogoCloud
+
 - Reusable trust/partner strip.
 
 6. CTASection variants
+
 - Inline, split, and centered variants with tokenized spacing.
 
 ## Priority B: Layout and content composition helpers
 
 1. FeatureList variants
+
 - Icon list, numbered list, and split feature blocks.
 
 2. Timeline or Steps section
+
 - Program process and onboarding flows.
 
 3. CalloutBanner
+
 - Info/warning/success variant callouts.
 
 4. ResourceCardList
+
 - Reusable card list for resources and links.
 
 ## Priority C: Optional advanced primitives
 
 1. MediaShowcase
+
 - Image/video plus content split with responsive behavior.
 
 2. StickyInPageNav
+
 - For longer pages with section anchors.
 
 3. PricingOrPlanCards
+
 - Reusable plan matrix if future projects need it.
 
 ## Interaction and Motion Components

@@ -28,7 +28,11 @@ const year = new Date().getFullYear();
         <p class="footer-copy">© {year} {SITE.name}. All rights reserved.</p>
         <p class="footer-credit">
           Built by{' '}
-          <a href="https://www.prettyprettyprettygood.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.prettyprettyprettygood.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Pretty Pretty Pretty Good
           </a>
         </p>
@@ -36,10 +40,10 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="footer-top">
-      <button type="button" class="footer-top-button" data-scroll-top>
+      <button type="button" class="footer-top-button" data-scroll-top aria-label="Back to top">
         <ArrowUp aria-hidden="true" />
       </button>
-      <p class="footer-top-label">Back to top</p>
+      <p class="footer-top-label" aria-hidden="true">Back to top</p>
     </div>
   </div>
 

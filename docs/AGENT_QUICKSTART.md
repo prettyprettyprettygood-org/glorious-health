@@ -63,9 +63,12 @@ Optional backend support:
 9. In Site Builder mode, do not create new components/routes/endpoints/utilities unless explicitly requested.
 10. Add tests for new logic.
 11. Run full validation before finishing:
-   - npm run validate
+
+- npm run validate
+
 12. Ensure commit-time checks pass:
-   - npm run precommit:check
+
+- npm run precommit:check
 
 ## Default Deliverables
 

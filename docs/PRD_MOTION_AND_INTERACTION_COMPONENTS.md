@@ -47,12 +47,15 @@ Without reusable primitives, these effects become one-off code and inconsistency
 ## 1) CountUpStat component
 
 Suggested file:
+
 - src/components/ui/CountUpStat.astro
 
 Purpose:
+
 - Animate values from start to end when entering viewport.
 
 Suggested API:
+
 - start?: number (default 0)
 - end: number (required)
 - durationMs?: number (default 900)
@@ -62,67 +65,83 @@ Suggested API:
 - once?: boolean (default true)
 
 Behavior:
+
 - IntersectionObserver triggers animation on first in-view.
 - If reduced motion is preferred, render final value immediately.
 - Final value should always be available in markup for non-JS users.
 
 Accessibility:
+
 - Avoid noisy aria-live updates for every frame.
 - Preserve readable final value text in DOM.
 
 ## 2) Icon hover wiggle utility
 
 Suggested files:
+
 - src/components/ui/Icon.astro (if needed)
 - src/styles/global.css motion utility classes, or dedicated motion utility stylesheet
 
 Purpose:
+
 - Add subtle wiggle/tilt for icon affordance on hover/focus-visible.
 
 Suggested variants:
+
 - subtle, medium
 
 Behavior:
+
 - Trigger on hover and focus-visible.
 - Reduced motion disables transform animation.
 
 ## 3) Text hover accent utility
 
 Suggested implementation:
+
 - Utility class for heading/link text accent transitions.
 
 Purpose:
+
 - Color or underline accent transitions for card titles/headings.
 
 Behavior:
+
 - Hover and focus-visible parity.
 - Keep contrast compliant in default and hover/focus states.
 
 ## 4) Card interactive hover variants
 
 Suggested file updates:
+
 - src/components/ui/Card.astro
 - src/styles/global.css
 
 Purpose:
+
 - Standardize border-outline, subtle lift, and shadow variants.
 
 Suggested API extension:
+
 - hoverStyle?: 'none' | 'outline' | 'lift' | 'shadow-soft'
 
 Behavior:
+
 - Keyboard focus-visible should match intent of hover state.
 - Shadow values should remain restrained and token-driven.
 
 ## 5) Optional sparkle trail effect (advanced, opt-in)
 
 Suggested file:
+
 - src/components/ui/SparkleTrail.astro
 
 Purpose:
+
 - Optional playful effect for specific hero/landing sections.
 
 Guardrails:
+
 - Off by default.
 - Disabled for reduced motion.
 - Disabled for coarse pointers/touch by default.
@@ -142,6 +161,7 @@ Add or formalize motion tokens:
 - --motion-distance-md
 
 Rule:
+
 - All reusable motion effects should consume tokens instead of hard-coded timings/easings.
 
 ## Accessibility Requirements

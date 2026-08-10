@@ -16,6 +16,7 @@ Work in Site Builder mode unless I explicitly say Template Maintainer mode.
 
 Use Site Builder mode.
 Reference and follow these files first:
+
 - docs/AGENT_QUICKSTART.md
 - docs/agents/site-builder/README.md
 - docs/STANDARDS.md
@@ -31,6 +32,7 @@ Run npm run validate and report what changed.
 
 Use Site Builder mode.
 Reference and follow these files first:
+
 - docs/AGENT_QUICKSTART.md
 - docs/agents/site-builder/README.md
 - docs/STANDARDS.md
@@ -47,6 +49,7 @@ Run npm run validate and summarize token changes.
 
 Use Site Builder mode.
 Reference and follow these files first:
+
 - docs/AGENT_QUICKSTART.md
 - docs/agents/site-builder/README.md
 
@@ -60,6 +63,7 @@ Return a concise list of edited files and key copy changes.
 
 Use Site Builder mode.
 Reference and follow these files first:
+
 - docs/WCAG_2.2_CHECKLIST.md
 - docs/STANDARDS.md
 
@@ -75,6 +79,7 @@ Run npm run validate and report changes by severity.
 
 Use Template Maintainer mode.
 Reference and follow these files first:
+
 - docs/AGENT_QUICKSTART.md
 - docs/agents/template-maintainer/README.md
 - docs/STANDARDS.md
@@ -90,6 +95,7 @@ Run npm run validate and npm run precommit:check.
 
 Use Template Maintainer mode.
 Reference and follow these files first:
+
 - docs/PRD_MOTION_AND_INTERACTION_COMPONENTS.md
 - docs/agents/template-maintainer/README.md
 - docs/STANDARDS.md
@@ -105,6 +111,7 @@ Run npm run validate and npm run precommit:check.
 
 Use Template Maintainer mode.
 Reference and follow these files first:
+
 - docs/AGENT_QUICKSTART.md
 - docs/agents/template-maintainer/README.md
 - docs/STANDARDS.md
@@ -119,6 +126,7 @@ Run npm run validate and npm run precommit:check.
 
 Use Template Maintainer mode.
 Reference and follow these files first:
+
 - docs/PRD_LAYOUT_VARIANTS.md
 - docs/agents/template-maintainer/README.md
 - docs/STANDARDS.md
@@ -133,6 +141,7 @@ Run npm run validate and npm run precommit:check.
 
 Use Template Maintainer mode.
 Reference and follow these files first:
+
 - docs/PRD_VISUAL_BUILDER_FEASIBILITY.md
 - docs/PRD_LAYOUT_VARIANTS.md
 - docs/PRD_COMPONENT_LIBRARY_ROADMAP.md

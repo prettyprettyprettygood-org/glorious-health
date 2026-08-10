@@ -54,7 +54,7 @@ const reasons = [
             <label class="form-label" for="contact-message">Message</label>
             <textarea class="form-textarea" id="contact-message" name="message" required></textarea>
           </div>
-          <p class="form-error" data-contact-form-error hidden>
+          <p class="form-error" data-contact-form-error role="alert" hidden>
             Something went wrong sending your message. Please try again, or email us directly.
           </p>
           <div class="hero-actions hero-actions--end">
@@ -63,7 +63,7 @@ const reasons = [
             </button>
           </div>
         </form>
-        <div class="form-success" data-contact-form-success hidden>
+        <div class="form-success" data-contact-form-success role="status" hidden>
           <p class="form-success-title">Thank you for reaching out.</p>
           <p>I have received your message and will be in touch soon.</p>
         </div>
@@ -92,6 +92,8 @@ const reasons = [
           class="photo-frame"
           width="1920"
           height="1282"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

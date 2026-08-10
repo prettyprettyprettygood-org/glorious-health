@@ -7,8 +7,8 @@ Follow these standards when generating or editing code:
 
 - If `PROJECT_BRIEF.md` exists, treat it as the primary source of project scope and priorities.
 - Choose operating mode first:
-	- Template Maintainer mode: source template repo updates are allowed.
-	- Site Builder mode: cloned project updates should reuse existing components/tokens and avoid net-new architecture by default.
+  - Template Maintainer mode: source template repo updates are allowed.
+  - Site Builder mode: cloned project updates should reuse existing components/tokens and avoid net-new architecture by default.
 
 - Accessibility first: semantic HTML, keyboard support, visible focus, ARIA only when needed.
 - Meet WCAG 2.2 AA baseline.

@@ -8,6 +8,7 @@ const requestTypes = [
   { value: 'page', label: 'Page Update' },
   { value: 'blog', label: 'New Blog Post' },
 ];
+const adminPassword = import.meta.env.PUBLIC_ADMIN_PASSWORD ?? '';
 ---
 
 <BaseLayout title="Admin — Website Requests" robots="noindex">
@@ -16,22 +17,33 @@ const requestTypes = [
       <div class="card admin-login-card">
         <div class="form-card-heading">
           <p class="info-block-eyebrow">Admin Login</p>
-          <h2>Welcome, Ajai!</h2>
+          <h1>Welcome, Ajai!</h1>
           <p class="form-hint">Enter the password to view and submit website requests.</p>
         </div>
         <form class="form" data-admin-password-form>
           <div class="form-field">
             <label class="form-label" for="admin-password">Password</label>
-            <input
-              class="form-input"
-              type="password"
-              id="admin-password"
-              name="password"
-              required
-              autocomplete="off"
-            />
+            <div class="form-password-field">
+              <input
+                class="form-input"
+                type="password"
+                id="admin-password"
+                name="password"
+                required
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                class="form-password-toggle"
+                data-admin-password-toggle
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                Show
+              </button>
+            </div>
           </div>
-          <p class="form-error" data-admin-password-error hidden>
+          <p class="form-error" data-admin-password-error role="alert" hidden>
             Incorrect password. Please try again.
           </p>
           <div class="hero-actions hero-actions--end">
@@ -46,7 +58,7 @@ const requestTypes = [
         <div class="section-heading-row">
           <div>
             <p class="kicker">Request a Change</p>
-            <h1>What would you like updated?</h1>
+            <h2>What would you like updated?</h2>
           </div>
         </div>
         <form
@@ -98,7 +110,7 @@ const requestTypes = [
             </div>
           </div>
 
-          <p class="form-error" data-admin-form-error hidden>
+          <p class="form-error" data-admin-form-error role="alert" hidden>
             Something went wrong sending your request. Please try again.
           </p>
           <div class="hero-actions hero-actions--end">
@@ -107,7 +119,7 @@ const requestTypes = [
             </button>
           </div>
         </form>
-        <div class="form-success" data-admin-form-success hidden>
+        <div class="form-success" data-admin-form-success role="status" hidden>
           <p class="form-success-title">Request sent.</p>
           <p>Thanks — I have received your request and will follow up.</p>
         </div>
@@ -139,12 +151,14 @@ const requestTypes = [
   </section>
 </BaseLayout>
 
-<script is:inline define:vars={{ adminPassword: 'Celebrate2026!!' }}>
+<script is:inline define:vars={{ adminPassword }}>
   (() => {
     const gate = document.querySelector('[data-admin-gate]');
     const content = document.querySelector('[data-admin-content]');
     const passwordForm = document.querySelector('[data-admin-password-form]');
     const passwordError = document.querySelector('[data-admin-password-error]');
+    const passwordToggle = document.querySelector('[data-admin-password-toggle]');
+    const passwordInput = document.getElementById('admin-password');
 
     if (
       !(gate instanceof HTMLElement) ||
@@ -153,6 +167,16 @@ const requestTypes = [
       !(passwordError instanceof HTMLElement)
     ) {
       return;
+    }
+
+    if (passwordToggle instanceof HTMLButtonElement && passwordInput instanceof HTMLInputElement) {
+      passwordToggle.addEventListener('click', () => {
+        const isHidden = passwordInput.type === 'password';
+        passwordInput.type = isHidden ? 'text' : 'password';
+        passwordToggle.textContent = isHidden ? 'Hide' : 'Show';
+        passwordToggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+        passwordToggle.setAttribute('aria-pressed', String(isHidden));
+      });
     }
 
     const unlock = () => {

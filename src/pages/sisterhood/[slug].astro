@@ -5,7 +5,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('sisterhood', ({ data }) => data.source === 'original');
+  const posts = await getCollection(
+    'sisterhood',
+    ({ data }) => data.source === 'original' && !data.draft,
+  );
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -32,7 +35,6 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </div>
     <div class="post-header">
       <h1>{post.data.title}</h1>
-      {post.data.draft && <p class="chip">Draft</p>}
     </div>
     <div class="prose">
       <Content />

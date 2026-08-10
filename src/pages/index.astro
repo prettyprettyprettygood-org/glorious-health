@@ -10,7 +10,14 @@ import { SITE } from '../config/site';
   <section class="section hero stack">
     <h1 class="visually-hidden">{SITE.name} — {SITE.tagline}</h1>
     <div class="hero-logo-frame">
-      <img src="/images/logo.png" alt="" class="hero-logo" width="1050" height="600" />
+      <img
+        src="/images/logo.png"
+        alt=""
+        class="hero-logo"
+        width="1050"
+        height="600"
+        fetchpriority="high"
+      />
     </div>
 
     <p class="hero-copy">
@@ -34,6 +41,8 @@ import { SITE } from '../config/site';
         class="feature-panel-photo"
         width="1920"
         height="1280"
+        loading="lazy"
+        decoding="async"
       />
       <div class="feature-panel-content">
         <p class="kicker">Welcome</p>
@@ -53,14 +62,19 @@ import { SITE } from '../config/site';
       <h2>Gatherings, connection, and sisterhood.</h2>
     </div>
     <div class="grid grid-3 card-grid">
-      <Card title="Gatherings" eyebrow="In-Person & Online" href="/gatherings/" class="card-heading-center">
+      <Card
+        title="Gatherings"
+        eyebrow="In-Person & Online"
+        href="/gatherings/"
+        class="card-heading-center"
+      >
         <Fragment slot="icon">
           <span class="pillar-icon pillar-icon--primary" aria-hidden="true">
             <Sprout />
           </span>
         </Fragment>
-        Workshops that blend faith, herbal wisdom, and grief education to help widows heal in body,
-        mind, and spirit.
+        Workshops that blend faith, herbal wisdom, and grief education to help widows heal in body, mind,
+        and spirit.
       </Card>
       <Card title="Connection" eyebrow="Resources" href="/connection/" class="card-heading-center">
         <Fragment slot="icon">
@@ -70,7 +84,12 @@ import { SITE } from '../config/site';
         </Fragment>
         Recommended websites and books to support your healing journey between gatherings.
       </Card>
-      <Card title="Sisterhood" eyebrow="Reflections & Writing" href="/sisterhood/" class="card-heading-center">
+      <Card
+        title="Sisterhood"
+        eyebrow="Reflections & Writing"
+        href="/sisterhood/"
+        class="card-heading-center"
+      >
         <Fragment slot="icon">
           <span class="pillar-icon pillar-icon--primary" aria-hidden="true">
             <Heart />
@@ -89,6 +108,8 @@ import { SITE } from '../config/site';
         class="feature-panel-photo"
         width="1920"
         height="1280"
+        loading="lazy"
+        decoding="async"
       />
       <div class="feature-panel-content">
         <p class="kicker kicker-accent">In Memory</p>

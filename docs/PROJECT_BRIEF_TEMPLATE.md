@@ -15,9 +15,11 @@ The more complete this is, the fewer clarification loops you will get.
 ## 2) Success Criteria (Required)
 
 - Top 3 outcomes this website must achieve:
+
 1.
 2.
 3.
+
 - Launch deadline:
 - Must-have on day one:
 - Can wait until phase two:
@@ -27,6 +29,7 @@ The more complete this is, the fewer clarification loops you will get.
 - Project mode: `content-first` | `mixed` | `app-first`
 - Expected route count:
 - Planned pages/routes list:
+
 1.
 2.
 3.
@@ -64,9 +67,11 @@ Mark each as `none`, `basic`, or `advanced`.
 
 - Primary data source (CMS/DB/API):
 - Third-party services required:
+
 1.
 2.
 3.
+
 - Webhooks needed:
 - External API limits/constraints:
 
@@ -97,9 +102,11 @@ Mark each as `none`, `basic`, or `advanced`.
 ## 11) Definition of Done (Required)
 
 - What must be true at handoff:
+
 1.
 2.
 3.
+
 - Required docs to update:
 - Required checks to pass (`npm run validate`, `npm run precommit:check`):
 

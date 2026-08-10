@@ -29,10 +29,7 @@ const isActive = (href: string) =>
         {
           SITE.nav.map((item) => (
             <li>
-              <a
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
+              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>

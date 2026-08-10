@@ -7,13 +7,13 @@ Always treat this repository as a reusable Astro project template.
 Pick one mode before making changes:
 
 1. Template Maintainer mode:
-	- Use when working on this source template repository itself.
-	- You may add or refactor template code, components, and architecture.
-	- Read `docs/agents/template-maintainer/README.md` first.
+   - Use when working on this source template repository itself.
+   - You may add or refactor template code, components, and architecture.
+   - Read `docs/agents/template-maintainer/README.md` first.
 2. Site Builder mode:
-	- Use when working in a repository cloned from this template.
-	- Default to content/theme/layout updates using existing assets only.
-	- Read `docs/agents/site-builder/README.md` first.
+   - Use when working in a repository cloned from this template.
+   - Default to content/theme/layout updates using existing assets only.
+   - Read `docs/agents/site-builder/README.md` first.
 
 ## Required Standards
 

@@ -6,8 +6,8 @@ import Card from '../../components/ui/Card.astro';
 import StyledDropdown from '../../components/ui/StyledDropdown.astro';
 import { SITE } from '../../config/site';
 
-const posts = (await getCollection('sisterhood')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+const posts = (await getCollection('sisterhood', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
@@ -92,7 +92,6 @@ const sortOptions = [
                 href={href}
                 external={isExternal}
               >
-                {post.data.draft && <p class="chip">Draft</p>}
                 {isExternal && <p class="chip chip-source">From Hope for Widows Foundation</p>}
                 <p>{post.data.excerpt}</p>
               </Card>
@@ -147,7 +146,7 @@ const sortOptions = [
     }
 
     const items = Array.from(grid.querySelectorAll('[data-post-item]')).filter(
-      (item) => item instanceof HTMLElement
+      (item) => item instanceof HTMLElement,
     );
 
     let currentPage = 1;

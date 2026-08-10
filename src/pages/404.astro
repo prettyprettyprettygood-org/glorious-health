@@ -4,7 +4,11 @@ import Button from '../components/ui/Button.astro';
 import { SITE } from '../config/site';
 ---
 
-<BaseLayout title={`Page Not Found — ${SITE.name}`} description="This page couldn't be found." robots="noindex, follow">
+<BaseLayout
+  title={`Page Not Found — ${SITE.name}`}
+  description="This page couldn't be found."
+  robots="noindex, follow"
+>
   <section class="section hero stack">
     <p class="not-found-code" aria-hidden="true">404</p>
     <div>

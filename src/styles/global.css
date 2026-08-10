@@ -757,20 +757,8 @@ a {
   color: var(--tone-secondary);
 }
 
-.card-centered {
-  margin-inline: auto;
-}
-
 .text-center {
   text-align: center;
-}
-
-.ivy-divider {
-  display: block;
-  inline-size: min(100%, 14rem);
-  block-size: auto;
-  margin-inline: auto;
-  opacity: 0.85;
 }
 
 .card-eyebrow {
@@ -796,28 +784,6 @@ a {
 }
 
 .card-body {
-  color: var(--tone-text-muted);
-}
-
-.feature {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
-
-.feature-eyebrow {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--tone-text-muted);
-  margin: 0 0 0.2rem;
-}
-
-.feature-title {
-  margin: 0 0 var(--space-2);
-}
-
-.feature-copy {
   color: var(--tone-text-muted);
 }
 
@@ -1450,6 +1416,41 @@ a {
 .form-textarea {
   min-block-size: 8rem;
   resize: vertical;
+}
+
+.form-password-field {
+  position: relative;
+  display: grid;
+}
+
+.form-password-field .form-input {
+  padding-inline-end: 3.5rem;
+}
+
+.form-password-toggle {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 0.5rem;
+  transform: translateY(-50%);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  color: var(--tone-text-muted);
+  cursor: pointer;
+  padding: 0.25rem 0.35rem;
+}
+
+.form-password-toggle:hover,
+.form-password-toggle:focus-visible {
+  color: var(--tone-text);
+}
+
+.form-password-toggle:focus-visible {
+  outline: 3px solid var(--tone-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 .form-hint {
