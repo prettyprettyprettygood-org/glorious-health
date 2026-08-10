@@ -5,7 +5,7 @@ ministry for widows. The site introduces the ministry's three pillars —
 Gatherings, Connection, and Sisterhood — shares the founder's story, and gives
 widows, churches, and funeral homes a way to learn more and get in touch.
 
-Domain: [glorioushealthministries.com](https://glorioushealthministries.com)
+Domain: [www.glorioushealthministries.com](https://www.glorioushealthministries.com) (also live at [.net](https://www.glorioushealthministries.net))
 
 ## Tech Stack
 

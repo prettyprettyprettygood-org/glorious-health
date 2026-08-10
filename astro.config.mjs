@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://glorioushealthministries.com',
+  site: 'https://www.glorioushealthministries.com',
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/admin'),
