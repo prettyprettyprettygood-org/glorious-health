@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, Heart, Sprout, Users } from '@lucide/astro';
+import { Heart, Sprout, Users } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
@@ -28,9 +28,9 @@ import { SITE } from '../config/site';
       <Button href="/gatherings/" type="button">Join a Gathering</Button>
       <Button href="/about/" type="button" variant="outline">Meet Our Founder</Button>
     </div>
-    <a href="#pillars" class="hero-scroll-cue" aria-label="Scroll to see more">
-      <ArrowDown aria-hidden="true" />
-    </a>
+    <div class="motif-divider motif-divider--hero" aria-hidden="true">
+      <img src="/images/dove-hands.png" alt="" class="motif-divider-icon" width="289" height="342" />
+    </div>
   </section>
 
   <section class="section">
@@ -57,7 +57,7 @@ import { SITE } from '../config/site';
   </section>
 
   <section id="pillars" class="section stack">
-    <div>
+    <div class="text-center">
       <p class="kicker">What We Offer</p>
       <h2>Gatherings, connection, and sisterhood.</h2>
     </div>

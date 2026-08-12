@@ -107,20 +107,28 @@ const books = [
   description="Recommended websites and books to support your healing journey between gatherings."
 >
   <section class="section stack">
-    <div class="section-heading-row">
+    <div class="section-heading-row section-heading-row--center">
       <div>
         <p class="kicker">Connection</p>
         <h1>Resources for the journey between gatherings.</h1>
-        <p>
+        <p class="section-intro">
           A running list of websites and books Ajai recommends for widows navigating grief, faith,
           and healing.
         </p>
       </div>
-      <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
+      <div class="motif-divider">
+        <img
+          src="/images/dove-hands.png"
+          alt=""
+          class="motif-divider-icon"
+          width="289"
+          height="342"
+        />
+      </div>
     </div>
 
     <div class="stack">
-      <h2>Recommended Websites</h2>
+      <h2 class="text-center">Recommended Websites</h2>
       <div class="grid grid-2 card-grid grid-trailing-center">
         {
           websites.map((site) => (
@@ -154,7 +162,7 @@ const books = [
     <hr class="section-divider" />
 
     <div class="stack">
-      <h2>Recommended Books</h2>
+      <h2 class="text-center">Recommended Books</h2>
       <p>
         While every woman has a different grief journey, certain books and resources have proven to
         be helpful to me and others I support. Take your time and drink from the experiences and

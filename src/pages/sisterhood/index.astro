@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { Search } from '@lucide/astro';
+import { ExternalLink, Search } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import StyledDropdown from '../../components/ui/StyledDropdown.astro';
@@ -11,12 +11,6 @@ const posts = (await getCollection('sisterhood', ({ data }) => !data.draft)).sor
 );
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
-
-const sourceOptions = [
-  { value: 'all', label: 'All posts' },
-  { value: 'original', label: "Ajai's writing" },
-  { value: 'hopeforwidows', label: 'Hope for Widows Foundation' },
-];
 
 const sortOptions = [
   { value: 'newest', label: 'Newest first' },
@@ -29,16 +23,24 @@ const sortOptions = [
   description="Reflections and writing from Ajai Blue-Saunders on the healing journey."
 >
   <section class="section stack">
-    <div class="section-heading-row">
+    <div class="section-heading-row section-heading-row--center">
       <div>
         <p class="kicker">Sisterhood</p>
         <h1>Stories from the healing journey.</h1>
-        <p>
+        <p class="section-intro">
           Ajai's blog and writing lives here — reflections, encouragement, and wisdom from a woman
           walking this journey herself.
         </p>
       </div>
-      <img src="/images/dove-hands.png" alt="" class="section-motif" width="289" height="342" />
+      <div class="motif-divider">
+        <img
+          src="/images/dove-hands.png"
+          alt=""
+          class="motif-divider-icon"
+          width="289"
+          height="342"
+        />
+      </div>
     </div>
 
     <div class="sisterhood-controls">
@@ -53,14 +55,6 @@ const sortOptions = [
           data-sisterhood-search
         />
       </label>
-      <StyledDropdown
-        id="sisterhood-source"
-        label="Source"
-        options={sourceOptions}
-        value="all"
-        ariaLabel="Filter by source"
-        className="sisterhood-control"
-      />
       <StyledDropdown
         id="sisterhood-sort"
         label="Sort"
@@ -83,7 +77,6 @@ const sortOptions = [
               data-post-item
               data-title={post.data.title.toLowerCase()}
               data-excerpt={post.data.excerpt.toLowerCase()}
-              data-source={post.data.source}
               data-date={post.data.date.valueOf()}
             >
               <Card
@@ -92,7 +85,12 @@ const sortOptions = [
                 href={href}
                 external={isExternal}
               >
-                {isExternal && <p class="chip chip-source">From Hope for Widows Foundation</p>}
+                {isExternal && (
+                  <p class="chip chip-source">
+                    <ExternalLink aria-hidden="true" />
+                    Opens on Hope for Widows Foundation
+                  </p>
+                )}
                 <p>{post.data.excerpt}</p>
               </Card>
             </div>
@@ -121,7 +119,6 @@ const sortOptions = [
     const PAGE_SIZE = 9;
     const grid = document.querySelector('[data-sisterhood-grid]');
     const searchInput = document.querySelector('[data-sisterhood-search]');
-    const sourceSelect = document.getElementById('sisterhood-source');
     const sortSelect = document.getElementById('sisterhood-sort');
     const noResults = document.querySelector('[data-sisterhood-no-results]');
     const pagination = document.querySelector('[data-sisterhood-pagination]');
@@ -133,7 +130,6 @@ const sortOptions = [
     if (
       !(grid instanceof HTMLElement) ||
       !(searchInput instanceof HTMLInputElement) ||
-      !(sourceSelect instanceof HTMLSelectElement) ||
       !(sortSelect instanceof HTMLSelectElement) ||
       !(noResults instanceof HTMLElement) ||
       !(pagination instanceof HTMLElement) ||
@@ -153,15 +149,13 @@ const sortOptions = [
 
     const getFiltered = () => {
       const query = searchInput.value.trim().toLowerCase();
-      const sourceFilter = sourceSelect.value;
 
       const filtered = items.filter((item) => {
         const matchesQuery =
           !query ||
           (item.dataset.title ?? '').includes(query) ||
           (item.dataset.excerpt ?? '').includes(query);
-        const matchesSource = sourceFilter === 'all' || item.dataset.source === sourceFilter;
-        return matchesQuery && matchesSource;
+        return matchesQuery;
       });
 
       const sortOrder = sortSelect.value;
@@ -228,11 +222,6 @@ const sortOptions = [
     };
 
     searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      render();
-    });
-
-    sourceSelect.addEventListener('change', () => {
       currentPage = 1;
       render();
     });
