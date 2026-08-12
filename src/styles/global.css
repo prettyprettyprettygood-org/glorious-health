@@ -1636,6 +1636,14 @@ a {
   max-inline-size: 20rem;
 }
 
+.video-credit {
+  color: var(--tone-text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+  margin-block-start: var(--space-2);
+}
+
 .about-cta-title {
   margin: 0;
 }
