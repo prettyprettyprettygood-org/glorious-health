@@ -472,6 +472,7 @@ a {
 .hero-logo-frame {
   inline-size: min(100%, 40rem);
   margin-inline: auto;
+  margin-block-end: clamp(-2.75rem, -7vw, -0.75rem);
 }
 
 .hero-logo {
@@ -558,6 +559,19 @@ a {
   padding-block: var(--space-6) var(--space-16);
   padding-inline: var(--space-8);
   margin-block-start: var(--space-6);
+}
+
+.hero::before {
+  content: '';
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 60% at 50% 38%,
+    color-mix(in srgb, var(--tone-secondary) 16%, transparent) 0%,
+    color-mix(in srgb, var(--tone-primary) 12%, transparent) 40%,
+    transparent 72%
+  );
 }
 
 .hero-copy {
