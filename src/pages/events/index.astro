@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import { SITE } from '../../config/site';
+---
+
+<BaseLayout
+  title={`Events — ${SITE.name}`}
+  description="Upcoming events are on the way."
+  robots="noindex, follow"
+>
+  <section class="section hero stack">
+    <div>
+      <p class="kicker kicker-accent">Events</p>
+      <h1>Upcoming events are coming soon.</h1>
+    </div>
+    <p class="hero-copy">
+      We're putting together a calendar of upcoming events. In the meantime, take a look at our
+      gatherings and workshops.
+    </p>
+    <div class="hero-actions">
+      <Button href="/gatherings/" type="button">See Gatherings & Workshops</Button>
+      <Button href="/contact/" type="button" variant="outline">Contact Us</Button>
+    </div>
+  </section>
+</BaseLayout>

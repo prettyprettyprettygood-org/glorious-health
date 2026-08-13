@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import { SITE } from '../../config/site';
+---
+
+<BaseLayout
+  title={`Services — ${SITE.name}`}
+  description="Our services page is on the way."
+  robots="noindex, follow"
+>
+  <section class="section hero stack">
+    <div>
+      <p class="kicker kicker-accent">Services</p>
+      <h1>Our services page is coming soon.</h1>
+    </div>
+    <p class="hero-copy">
+      We're putting together a page for our services. In the meantime, take a look at our
+      gatherings and workshops.
+    </p>
+    <div class="hero-actions">
+      <Button href="/gatherings/" type="button">See Gatherings & Workshops</Button>
+      <Button href="/contact/" type="button" variant="outline">Contact Us</Button>
+    </div>
+  </section>
+</BaseLayout>
