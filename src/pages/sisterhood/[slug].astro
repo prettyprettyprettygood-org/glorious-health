@@ -61,5 +61,16 @@ const structuredData = {
     <div class="prose">
       <Content />
     </div>
+    {
+      post.data.source === 'hopeforwidows' && post.data.sourceUrl && (
+        <p class="post-source-credit">
+          Originally published on the{' '}
+          <a href={post.data.sourceUrl} target="_blank" rel="noopener noreferrer">
+            Hope for Widows Foundation
+          </a>
+          , shared here with their permission.
+        </p>
+      )
+    }
   </article>
 </BaseLayout>

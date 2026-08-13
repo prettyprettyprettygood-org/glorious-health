@@ -91,14 +91,14 @@ body::before {
   pointer-events: none;
   background:
     radial-gradient(
-      ellipse 60vw 50vh at 0% 0%,
-      color-mix(in srgb, var(--tone-secondary) 16%, transparent) 0%,
-      transparent 70%
+      ellipse 75vw 65vh at 0% 0%,
+      color-mix(in srgb, var(--tone-secondary) 30%, transparent) 0%,
+      transparent 75%
     ),
     radial-gradient(
-      ellipse 65vw 55vh at 100% 0%,
-      color-mix(in srgb, var(--tone-primary) 18%, transparent) 0%,
-      transparent 70%
+      ellipse 75vw 65vh at 100% 0%,
+      color-mix(in srgb, var(--tone-primary) 30%, transparent) 0%,
+      transparent 75%
     );
 }
 
@@ -1409,6 +1409,15 @@ a {
   border-radius: 2px;
   background: var(--tone-primary);
   transform: rotate(45deg);
+}
+
+.post-source-credit {
+  margin-block-start: var(--space-8);
+  padding-block-start: var(--space-6);
+  border-block-start: 1px solid var(--tone-border);
+  color: var(--tone-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .info-block {
