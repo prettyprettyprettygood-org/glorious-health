@@ -5,10 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
-  const posts = await getCollection(
-    'sisterhood',
-    ({ data }) => data.source === 'original' && !data.draft,
-  );
+  const posts = await getCollection('sisterhood', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -22,16 +19,41 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   month: 'long',
   year: 'numeric',
 }).format(post.data.date);
+const isoDate = post.data.date.toISOString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  datePublished: isoDate,
+  author: {
+    '@type': 'Person',
+    name: 'Ajai Blue-Saunders',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+  },
+};
 ---
 
-<BaseLayout title={`${post.data.title} — ${SITE.name}`} description={post.data.excerpt}>
+<BaseLayout
+  title={`${post.data.title} — ${SITE.name}`}
+  description={post.data.excerpt}
+  ogType="article"
+  articlePublishedTime={isoDate}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   <article class="section stack post">
     <div class="post-top-row">
       <a href="/sisterhood/" class="post-back">
         <ArrowLeft aria-hidden="true" />
         Back to Sisterhood
       </a>
-      <p class="kicker post-date">{formattedDate}</p>
+      <p class="kicker post-date">
+        <time datetime={isoDate}>{formattedDate}</time>
+      </p>
     </div>
     <div class="post-header">
       <h1>{post.data.title}</h1>

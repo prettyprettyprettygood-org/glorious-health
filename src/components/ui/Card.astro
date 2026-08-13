@@ -1,5 +1,5 @@
 ---
-import { ExternalLink } from '@lucide/astro';
+import { ArrowRight, ExternalLink } from '@lucide/astro';
 
 interface Props {
   title: string;
@@ -14,9 +14,9 @@ const { title, eyebrow, href, external = false, class: className = '' } = Astro.
 
 <article class={`card ${href ? 'card-link' : ''} ${className}`.trim()}>
   {
-    external && (
-      <span class="card-external-badge" aria-hidden="true">
-        <ExternalLink />
+    href && (
+      <span class="card-link-badge" aria-hidden="true">
+        {external ? <ExternalLink /> : <ArrowRight />}
       </span>
     )
   }
@@ -30,7 +30,7 @@ const { title, eyebrow, href, external = false, class: className = '' } = Astro.
           target={external ? '_blank' : undefined}
           rel={external ? 'noopener noreferrer' : undefined}
         >
-          {title}
+          <span class="card-title-text">{title}</span>
         </a>
       ) : (
         title

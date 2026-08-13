@@ -1,5 +1,8 @@
 {
   "permissions": {
-    "allow": ["Bash(npx astro:*)"]
+    "allow": [
+      "Bash(npx astro:*)",
+      "WebFetch(domain:hopeforwidows.org)"
+    ]
   }
 }

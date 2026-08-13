@@ -745,25 +745,29 @@ a {
   border-radius: inherit;
 }
 
-.card-link:hover {
+.card-link:hover,
+.card-link:focus-within {
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--tone-primary) 45%, var(--tone-border));
   box-shadow: 0 20px 36px rgb(44 36 56 / 0.14);
 }
 
-.card-link:has(.pillar-icon--secondary):hover {
+.card-link:has(.pillar-icon--secondary):hover,
+.card-link:has(.pillar-icon--secondary):focus-within {
   border-color: color-mix(in srgb, var(--tone-secondary) 45%, var(--tone-border));
 }
 
-.card-link:hover .card-title a {
+.card-link:hover .card-title a,
+.card-link:focus-within .card-title a {
   color: var(--tone-primary);
 }
 
-.card-link:has(.pillar-icon--secondary):hover .card-title a {
+.card-link:has(.pillar-icon--secondary):hover .card-title a,
+.card-link:has(.pillar-icon--secondary):focus-within .card-title a {
   color: var(--tone-secondary);
 }
 
-.card-external-badge {
+.card-link-badge {
   position: absolute;
   top: var(--space-4);
   right: var(--space-4);
@@ -778,18 +782,20 @@ a {
     color 160ms ease;
 }
 
-.card-external-badge svg {
+.card-link-badge svg {
   inline-size: 1.2rem;
   block-size: 1.2rem;
 }
 
-.card-link:hover .card-external-badge {
+.card-link:hover .card-link-badge,
+.card-link:focus-within .card-link-badge {
   opacity: 1;
   transform: translateY(0);
   color: var(--tone-primary);
 }
 
-.card-link:has(.pillar-icon--secondary):hover .card-external-badge {
+.card-link:has(.pillar-icon--secondary):hover .card-link-badge,
+.card-link:has(.pillar-icon--secondary):focus-within .card-link-badge {
   color: var(--tone-secondary);
 }
 
@@ -1194,11 +1200,11 @@ a {
 [data-sisterhood-grid] .card {
   display: flex;
   flex-direction: column;
-  block-size: 20rem;
+  block-size: 16.5rem;
   overflow: hidden;
 }
 
-[data-sisterhood-grid] .card-title {
+[data-sisterhood-grid] .card-title-text {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1218,9 +1224,25 @@ a {
 
 [data-sisterhood-grid] .card-body > p:last-child {
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+[data-sisterhood-grid] .sisterhood-card-more {
+  margin-top: auto;
+  align-self: flex-start;
+  padding-top: var(--space-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tone-primary);
+  display: inline-block;
+  transition: transform 160ms ease;
+}
+
+[data-sisterhood-grid] .card-link:hover .sisterhood-card-more,
+[data-sisterhood-grid] .card-link:focus-within .sisterhood-card-more {
+  transform: translateX(0.2em);
 }
 
 .sisterhood-pagination {
@@ -1247,6 +1269,13 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+}
+
+.sisterhood-credit {
+  margin: 0;
+  color: var(--tone-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .sisterhood-page-button {

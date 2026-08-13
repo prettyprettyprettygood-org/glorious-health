@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { ExternalLink, Search } from '@lucide/astro';
+import { Search } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import StyledDropdown from '../../components/ui/StyledDropdown.astro';
@@ -67,50 +67,53 @@ const sortOptions = [
 
     <div class="grid grid-3 card-grid" data-sisterhood-grid>
       {
-        posts.map((post) => {
-          const isExternal = post.data.source === 'hopeforwidows';
-          const href = isExternal ? post.data.sourceUrl : `/sisterhood/${post.id}/`;
-
-          return (
-            <div
-              class="sisterhood-card-item"
-              data-post-item
-              data-title={post.data.title.toLowerCase()}
-              data-excerpt={post.data.excerpt.toLowerCase()}
-              data-date={post.data.date.valueOf()}
+        posts.map((post) => (
+          <div
+            class="sisterhood-card-item"
+            data-post-item
+            data-title={post.data.title.toLowerCase()}
+            data-excerpt={post.data.excerpt.toLowerCase()}
+            data-date={post.data.date.valueOf()}
+          >
+            <Card
+              title={post.data.title}
+              eyebrow={dateFormatter.format(post.data.date)}
+              href={`/sisterhood/${post.id}/`}
             >
-              <Card
-                title={post.data.title}
-                eyebrow={dateFormatter.format(post.data.date)}
-                href={href}
-                external={isExternal}
-              >
-                {isExternal && (
-                  <p class="chip chip-source">
-                    <ExternalLink aria-hidden="true" />
-                    Opens on Hope for Widows Foundation
-                  </p>
-                )}
-                <p>{post.data.excerpt}</p>
-              </Card>
-            </div>
-          );
-        })
+              <p>{post.data.excerpt}</p>
+              <span class="sisterhood-card-more" aria-hidden="true">
+                Read more →
+              </span>
+            </Card>
+          </div>
+        ))
       }
     </div>
 
-    <p class="sisterhood-no-results" data-sisterhood-no-results hidden>
+    <p class="sisterhood-no-results" data-sisterhood-no-results hidden aria-live="polite">
       No posts match your search.
     </p>
 
     <div class="sisterhood-pagination" data-sisterhood-pagination>
-      <p class="sisterhood-pagination-summary" data-sisterhood-pagination-summary></p>
+      <p
+        class="sisterhood-pagination-summary"
+        data-sisterhood-pagination-summary
+        aria-live="polite"
+      >
+      </p>
       <nav class="sisterhood-pagination-nav" aria-label="Blog pagination">
         <button type="button" class="btn btn-outline btn-sm" data-sisterhood-prev>Previous</button>
         <div class="sisterhood-pagination-pages" data-sisterhood-pages></div>
         <button type="button" class="btn btn-outline btn-sm" data-sisterhood-next>Next</button>
       </nav>
     </div>
+
+    <p class="sisterhood-credit">
+      Many of the reflections shared here were originally written for and published by our friends
+      at the <a href="https://hopeforwidows.org" target="_blank" rel="noopener noreferrer"
+        >Hope for Widows Foundation</a
+      >, shared here with their permission.
+    </p>
   </section>
 </BaseLayout>
 
