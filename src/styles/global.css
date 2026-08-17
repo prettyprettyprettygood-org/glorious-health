@@ -1616,6 +1616,10 @@ a {
   margin-inline: auto;
 }
 
+.about-photo--inline {
+  max-inline-size: 20rem;
+}
+
 .about-copy {
   max-inline-size: 38rem;
 }
