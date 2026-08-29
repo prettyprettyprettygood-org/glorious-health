@@ -1141,6 +1141,10 @@ a {
   margin: 0;
 }
 
+#flyer {
+  scroll-margin-top: 5.5rem;
+}
+
 .flyer-panel {
   display: grid;
   justify-items: center;
