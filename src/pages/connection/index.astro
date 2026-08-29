@@ -1,5 +1,5 @@
 ---
-import { Check, MapPin, Phone, Mail } from '@lucide/astro';
+import { Check, MapPin, Phone, Mail, Download, Expand, X } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import BookCoverPlaceholder from '../../components/ui/BookCoverPlaceholder.astro';
@@ -198,5 +198,93 @@ const books = [
         }
       </div>
     </div>
+
+    <hr class="section-divider" />
+
+    <div class="stack">
+      <h2 class="text-center">Ministry Flyer</h2>
+      <p class="text-center">View or download our flyer to distribute to someone who might need this community.</p>
+      <div class="flyer-panel">
+        <button
+          type="button"
+          class="flyer-preview"
+          data-flyer-open
+          aria-haspopup="dialog"
+          aria-label="View larger flyer image"
+        >
+          <img
+            src="/images/glorious-health-flyer-preview.webp"
+            alt="Glorious Health Ministries flyer: A Healing Journey for Widows. Lists our mission and support offerings, with a QR code, website, and email to connect with the widow support group."
+            width="1024"
+            height="1536"
+            loading="lazy"
+          />
+          <span class="flyer-preview-hint">
+            <Expand aria-hidden="true" />
+            Click to view larger
+          </span>
+        </button>
+        <div class="flyer-actions">
+          <a
+            class="btn btn-solid btn-md"
+            href="/images/glorious-health-flyer.png"
+            download="Glorious-Health-Ministries-Flyer.png"
+          >
+            <Download aria-hidden="true" />
+            Download flyer
+          </a>
+          <p class="flyer-actions-note">
+            Save or print it to share with a friend, family member, or your church community.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <dialog class="flyer-dialog" data-flyer-dialog aria-label="Glorious Health Ministries flyer, enlarged">
+      <button
+        type="button"
+        class="flyer-dialog-close btn btn-ghost btn-sm"
+        data-flyer-close
+        aria-label="Close enlarged flyer"
+      >
+        <X aria-hidden="true" />
+      </button>
+      <img
+        src="/images/glorious-health-flyer-preview.webp"
+        alt="Glorious Health Ministries flyer: A Healing Journey for Widows. Lists our mission and support offerings, with a QR code, website, and email to connect with the widow support group."
+        width="1024"
+        height="1536"
+        loading="lazy"
+        decoding="async"
+      />
+    </dialog>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const dialog = document.querySelector('[data-flyer-dialog]');
+    const openTriggers = document.querySelectorAll('[data-flyer-open]');
+    const closeButton = document.querySelector('[data-flyer-close]');
+
+    if (!(dialog instanceof HTMLDialogElement) || !(closeButton instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    openTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        dialog.showModal();
+      });
+    });
+
+    closeButton.addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  })();
+</script>

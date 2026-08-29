@@ -1141,6 +1141,103 @@ a {
   margin: 0;
 }
 
+.flyer-panel {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.flyer-preview {
+  display: block;
+  position: relative;
+  inline-size: clamp(14rem, 36vw, 22rem);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--tone-surface);
+  box-shadow: var(--shadow-surface);
+}
+
+.flyer-preview img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  transition: transform 200ms ease;
+}
+
+.flyer-preview:hover img,
+.flyer-preview:focus-visible img {
+  transform: scale(1.03);
+}
+
+.flyer-preview:focus-visible {
+  outline: 3px solid var(--tone-ring);
+  outline-offset: 2px;
+}
+
+.flyer-preview-hint {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: color-mix(in srgb, #000 55%, transparent);
+}
+
+.flyer-preview-hint svg {
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.flyer-actions {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: center;
+}
+
+.flyer-actions-note {
+  color: var(--tone-text-muted);
+}
+
+.flyer-dialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: var(--tone-surface);
+  box-shadow: var(--shadow-surface);
+  max-inline-size: min(90vw, 32rem);
+  max-block-size: 90vh;
+}
+
+.flyer-dialog::backdrop {
+  background: color-mix(in srgb, #000 60%, transparent);
+}
+
+.flyer-dialog img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: calc(90vh - var(--space-8));
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.flyer-dialog-close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}
+
 .sisterhood-controls {
   display: flex;
   flex-wrap: wrap;
