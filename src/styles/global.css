@@ -1219,7 +1219,7 @@ a {
   padding: var(--space-4);
   background: var(--tone-surface);
   box-shadow: var(--shadow-surface);
-  max-inline-size: min(90vw, 32rem);
+  inline-size: min(90vw, 32rem);
   max-block-size: 90vh;
 }
 
@@ -1227,19 +1227,49 @@ a {
   background: color-mix(in srgb, #000 60%, transparent);
 }
 
+.flyer-dialog-viewport {
+  overflow: auto;
+  max-block-size: calc(90vh - var(--space-16));
+  border-radius: var(--radius-md);
+  scrollbar-width: thin;
+}
+
+.flyer-dialog-viewport.is-zoomed {
+  cursor: grab;
+}
+
+.flyer-dialog-viewport.is-panning {
+  cursor: grabbing;
+}
+
 .flyer-dialog img {
   display: block;
   inline-size: 100%;
+  max-inline-size: none;
   block-size: auto;
-  max-block-size: calc(90vh - var(--space-8));
-  object-fit: contain;
   border-radius: var(--radius-md);
+  transition: width 150ms ease;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .flyer-dialog-close {
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
+}
+
+.flyer-dialog-zoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-block-start: var(--space-3);
+}
+
+.flyer-dialog-zoom .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .sisterhood-controls {

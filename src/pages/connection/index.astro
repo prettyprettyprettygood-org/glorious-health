@@ -1,5 +1,5 @@
 ---
-import { Check, MapPin, Phone, Mail, Download, Expand, X } from '@lucide/astro';
+import { Check, MapPin, Phone, Mail, Download, Expand, X, ZoomIn, ZoomOut, RotateCcw } from '@lucide/astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import BookCoverPlaceholder from '../../components/ui/BookCoverPlaceholder.astro';
@@ -249,14 +249,28 @@ const books = [
       >
         <X aria-hidden="true" />
       </button>
-      <img
-        src="/images/glorious-health-flyer-preview.webp"
-        alt="Glorious Health Ministries flyer: A Healing Journey for Widows. Lists our mission and support offerings, with a QR code, address, and website to connect with the widow support group."
-        width="1200"
-        height="1553"
-        loading="lazy"
-        decoding="async"
-      />
+      <div class="flyer-dialog-viewport" data-flyer-viewport>
+        <img
+          src="/images/glorious-health-flyer-preview.webp"
+          alt="Glorious Health Ministries flyer: A Healing Journey for Widows. Lists our mission and support offerings, with a QR code, address, and website to connect with the widow support group."
+          width="1200"
+          height="1553"
+          loading="lazy"
+          decoding="async"
+          data-flyer-image
+        />
+      </div>
+      <div class="flyer-dialog-zoom" role="group" aria-label="Zoom flyer image">
+        <button type="button" class="btn btn-ghost btn-sm" data-flyer-zoom-out aria-label="Zoom out">
+          <ZoomOut aria-hidden="true" />
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" data-flyer-zoom-reset aria-label="Reset zoom">
+          <RotateCcw aria-hidden="true" />
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" data-flyer-zoom-in aria-label="Zoom in">
+          <ZoomIn aria-hidden="true" />
+        </button>
+      </div>
     </dialog>
   </section>
 </BaseLayout>
@@ -266,13 +280,45 @@ const books = [
     const dialog = document.querySelector('[data-flyer-dialog]');
     const openTriggers = document.querySelectorAll('[data-flyer-open]');
     const closeButton = document.querySelector('[data-flyer-close]');
+    const viewport = document.querySelector('[data-flyer-viewport]');
+    const image = document.querySelector('[data-flyer-image]');
+    const zoomInButton = document.querySelector('[data-flyer-zoom-in]');
+    const zoomOutButton = document.querySelector('[data-flyer-zoom-out]');
+    const zoomResetButton = document.querySelector('[data-flyer-zoom-reset]');
 
-    if (!(dialog instanceof HTMLDialogElement) || !(closeButton instanceof HTMLButtonElement)) {
+    if (
+      !(dialog instanceof HTMLDialogElement) ||
+      !(closeButton instanceof HTMLButtonElement) ||
+      !(viewport instanceof HTMLElement) ||
+      !(image instanceof HTMLImageElement) ||
+      !(zoomInButton instanceof HTMLButtonElement) ||
+      !(zoomOutButton instanceof HTMLButtonElement) ||
+      !(zoomResetButton instanceof HTMLButtonElement)
+    ) {
       return;
     }
 
+    const MIN_ZOOM = 1;
+    const MAX_ZOOM = 3;
+    const ZOOM_STEP = 0.5;
+    let zoom = MIN_ZOOM;
+
+    const applyZoom = () => {
+      image.style.width = `${zoom * 100}%`;
+      zoomOutButton.disabled = zoom <= MIN_ZOOM;
+      zoomInButton.disabled = zoom >= MAX_ZOOM;
+      viewport.classList.toggle('is-zoomed', zoom > MIN_ZOOM);
+    };
+
+    const resetZoom = () => {
+      zoom = MIN_ZOOM;
+      viewport.scrollTo(0, 0);
+      applyZoom();
+    };
+
     openTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
+        resetZoom();
         dialog.showModal();
       });
     });
@@ -286,5 +332,56 @@ const books = [
         dialog.close();
       }
     });
+
+    dialog.addEventListener('close', resetZoom);
+
+    zoomInButton.addEventListener('click', () => {
+      zoom = Math.min(MAX_ZOOM, zoom + ZOOM_STEP);
+      applyZoom();
+    });
+
+    zoomOutButton.addEventListener('click', () => {
+      zoom = Math.max(MIN_ZOOM, zoom - ZOOM_STEP);
+      applyZoom();
+    });
+
+    zoomResetButton.addEventListener('click', resetZoom);
+
+    let isPanning = false;
+    let panOrigin = { x: 0, y: 0, scrollLeft: 0, scrollTop: 0 };
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (zoom <= MIN_ZOOM || event.pointerType !== 'mouse') {
+        return;
+      }
+      isPanning = true;
+      panOrigin = {
+        x: event.clientX,
+        y: event.clientY,
+        scrollLeft: viewport.scrollLeft,
+        scrollTop: viewport.scrollTop,
+      };
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-panning');
+    });
+
+    viewport.addEventListener('pointermove', (event) => {
+      if (!isPanning) {
+        return;
+      }
+      viewport.scrollLeft = panOrigin.scrollLeft - (event.clientX - panOrigin.x);
+      viewport.scrollTop = panOrigin.scrollTop - (event.clientY - panOrigin.y);
+    });
+
+    const endPan = () => {
+      isPanning = false;
+      viewport.classList.remove('is-panning');
+    };
+
+    viewport.addEventListener('pointerup', endPan);
+    viewport.addEventListener('pointercancel', endPan);
+    image.addEventListener('dragstart', (event) => event.preventDefault());
+
+    applyZoom();
   })();
 </script>
